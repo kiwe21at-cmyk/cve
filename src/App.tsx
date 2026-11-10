@@ -20,14 +20,13 @@ import {
 } from 'lucide-react';
 import {
   type Vulnerability,
-  INITIAL_VULNS,
   fetchLiveVulnerabilities,
-  searchCveById,
-  isWithinLast7Days
+  searchCveById
 } from './services/cveService';
 
 export default function App() {
-  const [vulns, setVulns] = useState<Vulnerability[]>(() => INITIAL_VULNS.filter((v) => isWithinLast7Days(v.publishedAt)));
+  const [vulns, setVulns] = useState<Vulnerability[]>([]);
+  const [isLoadingInitial, setIsLoadingInitial] = useState(true);
   const [selectedFilter, setSelectedFilter] = useState<'ALL' | 'CRITICAL' | 'HIGH' | 'EXPLOITED' | 'KISA'>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedVuln, setSelectedVuln] = useState<Vulnerability | null>(null);
@@ -54,13 +53,14 @@ export default function App() {
       setIsLive(res.isLive);
       setLastUpdated(res.lastUpdated);
       setIsRefreshing(false);
+      setIsLoadingInitial(false);
 
       if (res.sourceType === 'API') {
         setApiStatusText('NVD · KISA 최근 7일 피드 연동');
       } else if (res.sourceType === 'CACHE') {
         setApiStatusText('최근 7일 피드 (캐시 보호 모드)');
       } else {
-        setApiStatusText('최근 7일 백업 피드 활성');
+        setApiStatusText('API 연결 대기 중');
       }
     };
 
@@ -413,7 +413,15 @@ export default function App() {
 
         {/* Vulnerability List Cards */}
         <div className="space-y-3">
-          {filteredVulns.length === 0 ? (
+          {isLoadingInitial && vulns.length === 0 ? (
+            <div className="p-12 text-center bg-slate-900/60 rounded-2xl border border-slate-800 space-y-3">
+              <Loader2 className="w-8 h-8 text-indigo-400 animate-spin mx-auto" />
+              <p className="text-sm font-semibold text-slate-200">실시간 보안 취약점 피드를 불러오는 중입니다...</p>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                NVD 2.0 API에서 최근 7일간의 최신 CVE 데이터를 실시간 동기화하고 있습니다.
+              </p>
+            </div>
+          ) : filteredVulns.length === 0 ? (
             <div className="p-8 text-center bg-slate-900/60 rounded-2xl border border-slate-800 space-y-2">
               <ShieldCheck className="w-10 h-10 text-slate-500 mx-auto" />
               <p className="text-sm font-semibold text-slate-300">검색 조건에 맞는 취약점이 없습니다.</p>
