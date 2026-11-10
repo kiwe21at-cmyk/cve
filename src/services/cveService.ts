@@ -271,19 +271,21 @@ export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<Fe
     }
   }
 
-  // 2. VulnCheck Community API 호출 (NVD 2.0 호환 엔드포인트)
+  // 2. VulnCheck Community API 호출 (NVD 2.0 호환 엔드포인트 + CORS 프록시 우회)
   try {
     const startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
     const endDate = now.toISOString();
 
-    const url = `https://api.vulncheck.com/rest/json/cves/2.0?pubStartDate=${encodeURIComponent(
+    const apiUrl = `https://api.vulncheck.com/rest/json/cves/2.0?pubStartDate=${encodeURIComponent(
       startDate
     )}&pubEndDate=${encodeURIComponent(endDate)}&resultsPerPage=50&noRejected`;
+
+    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(apiUrl)}`;
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 9000); // 9초 타임아웃
 
-    const response = await fetch(url, {
+    const response = await fetch(proxyUrl, {
       signal: controller.signal,
       headers: getAuthHeaders()
     });
@@ -365,12 +367,11 @@ export async function searchCveById(cveId: string): Promise<Vulnerability | null
   }
 
   try {
-    const response = await fetch(
-      `https://api.vulncheck.com/rest/json/cves/2.0?cveId=${encodeURIComponent(cleaned)}`,
-      {
-        headers: getAuthHeaders()
-      }
-    );
+    const apiUrl = `https://api.vulncheck.com/rest/json/cves/2.0?cveId=${encodeURIComponent(cleaned)}`;
+    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(apiUrl)}`;
+    const response = await fetch(proxyUrl, {
+      headers: getAuthHeaders()
+    });
     if (!response.ok) return null;
     const json = await response.json();
     const item = json.vulnerabilities?.[0];
