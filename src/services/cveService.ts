@@ -29,8 +29,7 @@ export function isWithinLast7Days(publishedAt: string): boolean {
   }
 }
 
-const CACHE_KEY = 'secvigil_vulncheck_live_7days_v1';
-const CACHE_TTL_MS = 5 * 60 * 1000; // 5분 캐시
+
 
 interface NvdCveItem {
   cve: {
@@ -233,160 +232,46 @@ export interface FetchResult {
   error?: string;
 }
 
-function getAuthHeaders(): Record<string, string> {
-  const apiKey = (typeof window !== 'undefined' ? localStorage.getItem('vulncheck_api_key') : '') || '';
-  const headers: Record<string, string> = {
-    Accept: 'application/json'
-  };
-  if (apiKey) {
-    headers['apiKey'] = apiKey;
-  }
-  return headers;
-}
-
 export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<FetchResult> {
   const now = new Date();
   const currentTimeStr = now.toLocaleTimeString('ko-KR', { hour12: false });
 
-  // 1. 사전 빌드된 cves.json 로드 시도 (CORS 우회 및 API 키 노출 방지)
-  if (!forceRefresh) {
-    try {
-      const res = await fetch('./cves.json');
-      if (res.ok) {
-        const payload = await res.json();
-        if (payload && Array.isArray(payload.vulnerabilities)) {
-          const rawItems: NvdCveItem[] = payload.vulnerabilities;
-          const fetchedVulns = rawItems.map(parseNvdItem);
-          const finalVulns = fetchedVulns.filter((v) => isWithinLast7Days(v.publishedAt));
-          finalVulns.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
-          const kisaCount = finalVulns.filter((v) => v.source === 'KISA').length;
-
-          return {
-            vulnerabilities: finalVulns,
-            isLive: true,
-            lastUpdated: payload.lastUpdated || currentTimeStr,
-            sourceType: 'API',
-            kisaCount
-          };
-        }
-      }
-    } catch {
-      // fallback to proxy / localStorage cache
-    }
-  }
-
-  // 2. 캐시 확인
-  if (!forceRefresh) {
-    try {
-      const cached = localStorage.getItem(CACHE_KEY);
-      if (cached) {
-        const parsed = JSON.parse(cached);
-        if (parsed.timestamp && Date.now() - parsed.timestamp < CACHE_TTL_MS && Array.isArray(parsed.data)) {
-          const valid7Days = parsed.data.filter((v: Vulnerability) => isWithinLast7Days(v.publishedAt));
-          const kisaCount = valid7Days.filter((v: Vulnerability) => v.source === 'KISA').length;
-          return {
-            vulnerabilities: valid7Days,
-            isLive: true,
-            lastUpdated: parsed.lastUpdated || currentTimeStr,
-            sourceType: 'CACHE',
-            kisaCount
-          };
-        }
-      }
-    } catch {
-      // ignore localStorage errors
-    }
-  }
-
-  // 2. VulnCheck Community API 호출 (NVD 2.0 호환 엔드포인트 + CORS 프록시 우회)
   try {
-    const startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-    const endDate = now.toISOString();
+    const jsonUrl = forceRefresh ? `./cves.json?t=${Date.now()}` : './cves.json';
+    const res = await fetch(jsonUrl);
+    if (res.ok) {
+      const payload = await res.json();
+      if (payload && Array.isArray(payload.vulnerabilities)) {
+        const rawItems: NvdCveItem[] = payload.vulnerabilities;
+        const fetchedVulns = rawItems.map(parseNvdItem);
+        const finalVulns = fetchedVulns.filter((v) => isWithinLast7Days(v.publishedAt));
+        finalVulns.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+        const kisaCount = finalVulns.filter((v) => v.source === 'KISA').length;
 
-    const apiUrl = `https://api.vulncheck.com/rest/json/cves/2.0?pubStartDate=${encodeURIComponent(
-      startDate
-    )}&pubEndDate=${encodeURIComponent(endDate)}&resultsPerPage=50&noRejected`;
-
-    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(apiUrl)}`;
-
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 9000); // 9초 타임아웃
-
-    const response = await fetch(proxyUrl, {
-      signal: controller.signal,
-      headers: getAuthHeaders()
-    });
-    clearTimeout(timeoutId);
-
-    if (!response.ok) {
-      throw new Error(`VulnCheck API 응답 코드: ${response.status}`);
-    }
-
-    const json = await response.json();
-    const rawItems: NvdCveItem[] = json.vulnerabilities || [];
-
-    const fetchedVulns = rawItems.map(parseNvdItem);
-    const finalVulns = fetchedVulns.filter((v) => isWithinLast7Days(v.publishedAt));
-    finalVulns.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
-
-    const kisaCount = finalVulns.filter((v) => v.source === 'KISA').length;
-
-    try {
-      localStorage.setItem(
-        CACHE_KEY,
-        JSON.stringify({
-          data: finalVulns,
-          timestamp: Date.now(),
-          lastUpdated: currentTimeStr
-        })
-      );
-    } catch {
-      // ignore storage quota
-    }
-
-    return {
-      vulnerabilities: finalVulns,
-      isLive: true,
-      lastUpdated: currentTimeStr,
-      sourceType: 'API',
-      kisaCount
-    };
-  } catch (err: unknown) {
-    const errorMsg = err instanceof Error ? err.message : '네트워크 오류';
-    console.warn('VulnCheck API 실시간 조회 실패:', errorMsg);
-
-    try {
-      const cached = localStorage.getItem(CACHE_KEY);
-      if (cached) {
-        const parsed = JSON.parse(cached);
-        if (Array.isArray(parsed.data) && parsed.data.length > 0) {
-          const valid7Days = parsed.data.filter((v: Vulnerability) => isWithinLast7Days(v.publishedAt));
-          return {
-            vulnerabilities: valid7Days,
-            isLive: false,
-            lastUpdated: parsed.lastUpdated || currentTimeStr,
-            sourceType: 'CACHE',
-            kisaCount: valid7Days.filter((v: Vulnerability) => v.source === 'KISA').length,
-            error: errorMsg
-          };
-        }
+        return {
+          vulnerabilities: finalVulns,
+          isLive: true,
+          lastUpdated: payload.lastUpdated || currentTimeStr,
+          sourceType: 'API',
+          kisaCount
+        };
       }
-    } catch {
-      // ignore
     }
-
-    return {
-      vulnerabilities: [],
-      isLive: false,
-      lastUpdated: currentTimeStr,
-      sourceType: 'EMPTY',
-      kisaCount: 0,
-      error: errorMsg
-    };
+  } catch (err) {
+    console.warn('Failed to fetch cves.json:', err);
   }
+
+  return {
+    vulnerabilities: [],
+    isLive: false,
+    lastUpdated: currentTimeStr,
+    sourceType: 'EMPTY',
+    kisaCount: 0,
+    error: '사전 빌드된 CVE 피드를 불러오지 못했습니다.'
+  };
 }
 
-// 특정 CVE ID 직접 검색 API (VulnCheck NVD 호환 엔드포인트)
+// 특정 CVE ID 직접 검색 API (사전 빌드된 cves.json 기반 검색)
 export async function searchCveById(cveId: string): Promise<Vulnerability | null> {
   const cleaned = cveId.trim().toUpperCase();
   if (!/^CVE-\d{4}-\d+$/i.test(cleaned)) {
@@ -394,16 +279,15 @@ export async function searchCveById(cveId: string): Promise<Vulnerability | null
   }
 
   try {
-    const apiUrl = `https://api.vulncheck.com/rest/json/cves/2.0?cveId=${encodeURIComponent(cleaned)}`;
-    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(apiUrl)}`;
-    const response = await fetch(proxyUrl, {
-      headers: getAuthHeaders()
-    });
-    if (!response.ok) return null;
-    const json = await response.json();
-    const item = json.vulnerabilities?.[0];
-    if (item) {
-      return parseNvdItem(item);
+    const res = await fetch('./cves.json');
+    if (res.ok) {
+      const payload = await res.json();
+      if (payload && Array.isArray(payload.vulnerabilities)) {
+        const found = payload.vulnerabilities.find((item: NvdCveItem) => item.cve?.id === cleaned);
+        if (found) {
+          return parseNvdItem(found);
+        }
+      }
     }
   } catch {
     // ignore

@@ -6,8 +6,19 @@ const API_KEY = process.env.VULNCHECK_API_KEY;
 
 async function buildFeed() {
   if (!API_KEY) {
-    console.error('Error: VULNCHECK_API_KEY environment variable is missing!');
-    process.exit(1);
+    if (process.env.CI) {
+      console.error('Error: VULNCHECK_API_KEY environment variable is missing in CI!');
+      process.exit(1);
+    }
+    console.warn('Warning: VULNCHECK_API_KEY environment variable is missing. Generating fallback cves.json for local environment.');
+    const fallbackPayload = {
+      timestamp: Date.now(),
+      lastUpdated: new Date().toLocaleTimeString('ko-KR', { hour12: false }),
+      vulnerabilities: []
+    };
+    fs.mkdirSync(path.dirname(CACHE_FILE), { recursive: true });
+    fs.writeFileSync(CACHE_FILE, JSON.stringify(fallbackPayload, null, 2));
+    return;
   }
 
   const now = new Date();

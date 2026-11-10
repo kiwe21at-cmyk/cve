@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/fetch-cves.js || true",
+    "prebuild": "node scripts/fetch-cves.js",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview"
