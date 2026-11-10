@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -23,8 +26,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
-        run: npm run build
+      - name: Fetch VulnCheck Feed & Build
+        env:
+          VULNCHECK_API_KEY: ${{ secrets.VULNCHECK_API_KEY }}
+        run: |
+          npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

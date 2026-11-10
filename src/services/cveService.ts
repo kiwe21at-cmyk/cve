@@ -248,7 +248,34 @@ export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<Fe
   const now = new Date();
   const currentTimeStr = now.toLocaleTimeString('ko-KR', { hour12: false });
 
-  // 1. 캐시 확인
+  // 1. 사전 빌드된 cves.json 로드 시도 (CORS 우회 및 API 키 노출 방지)
+  if (!forceRefresh) {
+    try {
+      const res = await fetch('./cves.json');
+      if (res.ok) {
+        const payload = await res.json();
+        if (payload && Array.isArray(payload.vulnerabilities)) {
+          const rawItems: NvdCveItem[] = payload.vulnerabilities;
+          const fetchedVulns = rawItems.map(parseNvdItem);
+          const finalVulns = fetchedVulns.filter((v) => isWithinLast7Days(v.publishedAt));
+          finalVulns.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+          const kisaCount = finalVulns.filter((v) => v.source === 'KISA').length;
+
+          return {
+            vulnerabilities: finalVulns,
+            isLive: true,
+            lastUpdated: payload.lastUpdated || currentTimeStr,
+            sourceType: 'API',
+            kisaCount
+          };
+        }
+      }
+    } catch {
+      // fallback to proxy / localStorage cache
+    }
+  }
+
+  // 2. 캐시 확인
   if (!forceRefresh) {
     try {
       const cached = localStorage.getItem(CACHE_KEY);
