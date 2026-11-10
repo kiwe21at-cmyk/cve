@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import fetch from 'node-fetch';
 
 const CACHE_FILE = path.join(process.cwd(), 'public', 'cves.json');
 const API_KEY = process.env.VULNCHECK_API_KEY;
