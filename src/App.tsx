@@ -16,7 +16,8 @@ import {
   Bell,
   Flame,
   Radio,
-  Loader2
+  Loader2,
+  Key
 } from 'lucide-react';
 import {
   type Vulnerability,
@@ -36,9 +37,17 @@ export default function App() {
   // 실시간 API 연동 상태
   const [isLive, setIsLive] = useState(false);
   const [lastUpdated, setLastUpdated] = useState('초기화 중...');
-  const [apiStatusText, setApiStatusText] = useState('NVD 실시간 API 연결 중...');
+  const [apiStatusText, setApiStatusText] = useState('VulnCheck API 연결 중...');
   const [isSearchingApi, setIsSearchingApi] = useState(false);
   const [searchNotice, setSearchNotice] = useState<string | null>(null);
+  const [showSettings, setShowSettings] = useState(false);
+  const [apiKeyInput, setApiKeyInput] = useState(() => localStorage.getItem('vulncheck_api_key') || '');
+
+  const handleSaveApiKey = () => {
+    localStorage.setItem('vulncheck_api_key', apiKeyInput.trim());
+    setShowSettings(false);
+    handleRefresh();
+  };
 
   // 초기 로드 및 5분 주기 백그라운드 자동 갱신
   useEffect(() => {
@@ -56,11 +65,11 @@ export default function App() {
       setIsLoadingInitial(false);
 
       if (res.sourceType === 'API') {
-        setApiStatusText('NVD · KISA 최근 7일 피드 연동');
+        setApiStatusText('VulnCheck · KISA 최근 7일 피드 연동');
       } else if (res.sourceType === 'CACHE') {
         setApiStatusText('최근 7일 피드 (캐시 보호 모드)');
       } else {
-        setApiStatusText('API 연결 대기 중');
+        setApiStatusText('API 연결 대기 중 (API Key 확인)');
       }
     };
 
@@ -88,11 +97,11 @@ export default function App() {
     setIsRefreshing(false);
 
     if (res.sourceType === 'API') {
-      setApiStatusText('NVD · KISA 최근 7일 갱신 완료');
+      setApiStatusText('VulnCheck · KISA 최근 7일 갱신 완료');
     } else if (res.sourceType === 'CACHE') {
       setApiStatusText('최근 7일 피드 유지 (속도제한 보호)');
     } else {
-      setApiStatusText('API 일시 지연 (백업 모드)');
+      setApiStatusText('API 일시 지연 또는 Key 확인 필요');
     }
   };
 
@@ -101,7 +110,7 @@ export default function App() {
     if (!q) return;
 
     setIsSearchingApi(true);
-    setSearchNotice(`NVD 데이터베이스에서 "${q}" 검색 중...`);
+    setSearchNotice(`VulnCheck 데이터베이스에서 "${q}" 검색 중...`);
     const found = await searchCveById(q);
     setIsSearchingApi(false);
 
@@ -113,7 +122,7 @@ export default function App() {
       setSelectedVuln(found);
       setSearchNotice(`${found.cveId} 조회 성공`);
     } else {
-      setSearchNotice(`"${q}"에 해당하는 CVE를 NVD에서 찾지 못했습니다.`);
+      setSearchNotice(`"${q}"에 해당하는 CVE를 VulnCheck에서 찾지 못했습니다.`);
     }
 
     setTimeout(() => {
@@ -210,6 +219,14 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-1.5">
+            <button
+              onClick={() => setShowSettings(true)}
+              className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all active:scale-95"
+              aria-label="API Key 설정"
+              title="VulnCheck API Key 설정"
+            >
+              <Key className="w-4 h-4 text-indigo-400" />
+            </button>
             <button
               onClick={handleRefresh}
               disabled={isRefreshing}
@@ -334,12 +351,12 @@ export default function App() {
               {isSearchingApi ? (
                 <>
                   <Loader2 className="w-3.5 h-3.5 animate-spin text-indigo-400" />
-                  <span>NVD 데이터베이스 검색 중...</span>
+                  <span>VulnCheck 데이터베이스 검색 중...</span>
                 </>
               ) : (
                 <>
                   <Search className="w-3.5 h-3.5 text-indigo-400" />
-                  <span>NVD에서 <strong>{searchQuery.trim().toUpperCase()}</strong> 직접 검색</span>
+                  <span>VulnCheck에서 <strong>{searchQuery.trim().toUpperCase()}</strong> 직접 검색</span>
                 </>
               )}
             </button>
@@ -418,7 +435,7 @@ export default function App() {
               <Loader2 className="w-8 h-8 text-indigo-400 animate-spin mx-auto" />
               <p className="text-sm font-semibold text-slate-200">실시간 보안 취약점 피드를 불러오는 중입니다...</p>
               <p className="text-xs text-slate-400 leading-relaxed">
-                NVD 2.0 API에서 최근 7일간의 최신 CVE 데이터를 실시간 동기화하고 있습니다.
+                VulnCheck Community API에서 최근 7일간의 최신 CVE 데이터를 실시간 동기화하고 있습니다.
               </p>
             </div>
           ) : filteredVulns.length === 0 ? (
@@ -608,6 +625,53 @@ export default function App() {
                 className="py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs active:scale-95 transition-all"
               >
                 닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Settings Modal */}
+      {showSettings && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4">
+          <div
+            className="w-full max-w-sm bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-bold text-white flex items-center gap-2">
+                <Key className="w-4 h-4 text-indigo-400" />
+                VulnCheck Community API 설정
+              </h3>
+              <button
+                onClick={() => setShowSettings(false)}
+                className="p-1 rounded-full bg-slate-800 text-slate-400 hover:text-white"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              VulnCheck Community API Key를 입력하여 실시간 CVE 데이터를 조회하세요. (console.vulncheck.com에서 무료 발급 가능)
+            </p>
+            <input
+              type="password"
+              value={apiKeyInput}
+              onChange={(e) => setApiKeyInput(e.target.value)}
+              placeholder="API Key 입력 (예: vc_live_...)"
+              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500 font-mono"
+            />
+            <div className="flex gap-2 pt-1">
+              <button
+                onClick={handleSaveApiKey}
+                className="flex-1 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/30"
+              >
+                저장 및 연동
+              </button>
+              <button
+                onClick={() => setShowSettings(false)}
+                className="py-2 px-3 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs"
+              >
+                취소
               </button>
             </div>
           </div>

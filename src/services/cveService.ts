@@ -29,7 +29,7 @@ export function isWithinLast7Days(publishedAt: string): boolean {
   }
 }
 
-const CACHE_KEY = 'secvigil_cve_live_7days_v3_clean';
+const CACHE_KEY = 'secvigil_vulncheck_live_7days_v1';
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5분 캐시
 
 interface NvdCveItem {
@@ -204,10 +204,10 @@ function parseNvdItem(item: NvdCveItem): Vulnerability {
   // 조치 방안
   const solution =
     cve.cisaRequiredAction ||
-    '해당 벤더사 및 공식 보안 기관(KISA/NVD)의 최신 패치 버전을 확인하여 즉시 업데이트하십시오.';
+    '해당 벤더사 및 공식 보안 기관(KISA/VulnCheck)의 최신 패치 버전을 확인하여 즉시 업데이트하십시오.';
 
   return {
-    id: `nvd-${cve.id}`,
+    id: `vulncheck-${cve.id}`,
     cveId: cve.id,
     title,
     description,
@@ -233,11 +233,22 @@ export interface FetchResult {
   error?: string;
 }
 
+function getAuthHeaders(): Record<string, string> {
+  const apiKey = (typeof window !== 'undefined' ? localStorage.getItem('vulncheck_api_key') : '') || '';
+  const headers: Record<string, string> = {
+    Accept: 'application/json'
+  };
+  if (apiKey) {
+    headers['apiKey'] = apiKey;
+  }
+  return headers;
+}
+
 export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<FetchResult> {
   const now = new Date();
   const currentTimeStr = now.toLocaleTimeString('ko-KR', { hour12: false });
 
-  // 1. 캐시 확인 (오직 API를 통해 실제 받아왔던 실시간 캐시 데이터만 사용)
+  // 1. 캐시 확인
   if (!forceRefresh) {
     try {
       const cached = localStorage.getItem(CACHE_KEY);
@@ -260,12 +271,12 @@ export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<Fe
     }
   }
 
-  // 2. NVD API 호출 (정적 데이터 없이 100% 최근 7일 취약점 동적 요청)
+  // 2. VulnCheck Community API 호출 (NVD 2.0 호환 엔드포인트)
   try {
     const startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
     const endDate = now.toISOString();
 
-    const url = `https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=${encodeURIComponent(
+    const url = `https://api.vulncheck.com/rest/json/cves/2.0?pubStartDate=${encodeURIComponent(
       startDate
     )}&pubEndDate=${encodeURIComponent(endDate)}&resultsPerPage=50&noRejected`;
 
@@ -274,31 +285,23 @@ export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<Fe
 
     const response = await fetch(url, {
       signal: controller.signal,
-      headers: {
-        Accept: 'application/json'
-      }
+      headers: getAuthHeaders()
     });
     clearTimeout(timeoutId);
 
     if (!response.ok) {
-      throw new Error(`NVD API 응답 코드: ${response.status}`);
+      throw new Error(`VulnCheck API 응답 코드: ${response.status}`);
     }
 
     const json = await response.json();
     const rawItems: NvdCveItem[] = json.vulnerabilities || [];
 
-    // 순수 API 응답만 파싱
     const fetchedVulns = rawItems.map(parseNvdItem);
-
-    // 최근 7일 이내 데이터만 엄격하게 필터링
     const finalVulns = fetchedVulns.filter((v) => isWithinLast7Days(v.publishedAt));
-
-    // 최신 날짜순 내림차순 정렬
     finalVulns.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 
     const kisaCount = finalVulns.filter((v) => v.source === 'KISA').length;
 
-    // 캐시 저장
     try {
       localStorage.setItem(
         CACHE_KEY,
@@ -321,9 +324,8 @@ export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<Fe
     };
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : '네트워크 오류';
-    console.warn('NVD API 실시간 조회 실패:', errorMsg);
+    console.warn('VulnCheck API 실시간 조회 실패:', errorMsg);
 
-    // 실패 시 직전에 저장된 실제 API 캐시 조회
     try {
       const cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
@@ -344,7 +346,6 @@ export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<Fe
       // ignore
     }
 
-    // 캐시도 없을 경우 정적 데이터 없이 빈 배열 반환
     return {
       vulnerabilities: [],
       isLive: false,
@@ -356,7 +357,7 @@ export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<Fe
   }
 }
 
-// 특정 CVE ID 직접 검색 API (100% 동적 조회)
+// 특정 CVE ID 직접 검색 API (VulnCheck NVD 호환 엔드포인트)
 export async function searchCveById(cveId: string): Promise<Vulnerability | null> {
   const cleaned = cveId.trim().toUpperCase();
   if (!/^CVE-\d{4}-\d+$/i.test(cleaned)) {
@@ -365,7 +366,10 @@ export async function searchCveById(cveId: string): Promise<Vulnerability | null
 
   try {
     const response = await fetch(
-      `https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=${encodeURIComponent(cleaned)}`
+      `https://api.vulncheck.com/rest/json/cves/2.0?cveId=${encodeURIComponent(cleaned)}`,
+      {
+        headers: getAuthHeaders()
+      }
     );
     if (!response.ok) return null;
     const json = await response.json();
