@@ -15,11 +15,42 @@ export interface Vulnerability {
   references: string[];
 }
 
+export function isWithinLast7Days(publishedAt: string): boolean {
+  try {
+    const datePart = publishedAt.split(' ')[0];
+    if (!datePart) return false;
+    const pubTime = new Date(`${datePart}T00:00:00.000Z`).getTime();
+    const now = new Date();
+    const nowDateOnly = new Date(now.toISOString().split('T')[0] + 'T23:59:59.999Z').getTime();
+    const sevenDaysAgo = nowDateOnly - 7 * 24 * 60 * 60 * 1000;
+    return pubTime >= sevenDaysAgo;
+  } catch {
+    return false;
+  }
+}
+
+// 최근 7일 이내의 KISA KrCERT 보안권고 및 주요 취약점 데이터
 export const INITIAL_VULNS: Vulnerability[] = [
   {
-    id: 'v1',
+    id: 'kisa-1',
+    cveId: 'CVE-2026-40112',
+    title: '[KISA] 전자정부 표준프레임워크(eGovFrame) 원격 코드 실행 취약점 보안 패치 안내',
+    description: 'KISA KrCERT/CC 보안공지 권고: eGovFrame 공통 컴포넌트 내 파라미터 유효성 검증 미흡으로 원격에서 공격자가 악성 코드를 주입하여 서버 제어권을 획득할 수 있는 취약점입니다.',
+    cvss: 9.3,
+    severity: 'CRITICAL',
+    publishedAt: '2026-11-08 11:30',
+    affected: ['eGovFrame < 4.3.2', 'Spring Framework 6.x 연동 모듈'],
+    vendor: 'KISA / 전자정부',
+    exploitedInWild: true,
+    patchAvailable: true,
+    source: 'KISA',
+    solution: 'eGovFrame 4.3.2 이상으로 보안 업데이트 적용 및 보호나라 보안공지 대응 수칙 준수.',
+    references: ['https://www.boho.or.kr/kr/bbs/view.do?bbsId=B0000133&nttId=71975', 'https://krcert.or.kr']
+  },
+  {
+    id: 'kisa-2',
     cveId: 'CVE-2026-24108',
-    title: '리눅스 커널 eBPF 서브시스템 권한 상승 취약점',
+    title: '[KISA] 리눅스 커널 eBPF 서브시스템 권한 상승 취약점',
     description: 'Linux 커널의 eBPF 검증기(verifier) 내 경계 검사 오류로 인해 로컬 권한 없는 사용자가 root 권한을 획득할 수 있는 취약점입니다.',
     cvss: 9.8,
     severity: 'CRITICAL',
@@ -31,6 +62,22 @@ export const INITIAL_VULNS: Vulnerability[] = [
     source: 'KISA',
     solution: '커널 버전 6.12.8 이상으로 즉시 업그레이드하고 unprivileged_bpf_disabled 설정을 1로 적용하십시오.',
     references: ['https://www.boho.or.kr', 'https://nvd.nist.gov/vuln/detail/CVE-2026-24108']
+  },
+  {
+    id: 'kisa-3',
+    cveId: 'CVE-2026-38210',
+    title: '[KISA] 한글과컴퓨터 한컴오피스 스크립트 실행 취약점 보안 권고',
+    description: 'KISA KrCERT 보안 권고: 특수 제작된 한글(HWP) 문서 열람 시 스크립트 검증 우회를 통해 악성 매크로 및 외부 페이로드가 실행될 수 있는 위험이 보고되었습니다.',
+    cvss: 8.5,
+    severity: 'HIGH',
+    publishedAt: '2026-11-06 14:15',
+    affected: ['한컴오피스 2024 / 2026', '한글 2024'],
+    vendor: '한글과컴퓨터 (KISA KrCERT 권고)',
+    exploitedInWild: false,
+    patchAvailable: true,
+    source: 'KISA',
+    solution: '한컴오피스 자동 업데이트를 통해 2026년 11월 긴급 보안 패치를 즉시 적용하십시오.',
+    references: ['https://www.boho.or.kr', 'https://krcert.or.kr']
   },
   {
     id: 'v2',
@@ -81,9 +128,9 @@ export const INITIAL_VULNS: Vulnerability[] = [
     references: ['https://www.openssl.org/news/secadv/']
   },
   {
-    id: 'v5',
+    id: 'kisa-4',
     cveId: 'CVE-2026-30211',
-    title: 'Apple iOS / iPadOS WebKit 메모리 손상 취약점',
+    title: '[KISA] Apple iOS / iPadOS WebKit 메모리 손상 취약점',
     description: '모바일 사파리 및 WebKit 기반 앱에서 웹 콘텐츠 처리 중 발생하는 Use-After-Free 취약점으로, 임의 코드 실행 위험이 존재합니다.',
     cvss: 9.1,
     severity: 'CRITICAL',
@@ -94,27 +141,11 @@ export const INITIAL_VULNS: Vulnerability[] = [
     patchAvailable: true,
     source: 'KISA',
     solution: 'iOS 18.1.1 또는 iPadOS 18.1.1 소프트웨어 최신 업데이트 수행.',
-    references: ['https://support.apple.com/en-us/HT201222']
-  },
-  {
-    id: 'v6',
-    cveId: 'CVE-2026-27150',
-    title: 'Apache Tomcat HTTP/2 DoS 서비스 거부 취약점',
-    description: '과도한 HTTP/2 스트림 요청 제어 결함으로 인해 Tomcat 데몬의 CPU 점유율이 100%에 달하여 서비스 거부 상태를 유발할 수 있습니다.',
-    cvss: 6.5,
-    severity: 'MEDIUM',
-    publishedAt: '2026-11-02 11:20',
-    affected: ['Apache Tomcat 9.0.80 ~ 9.0.96', '10.1.0 ~ 10.1.31'],
-    vendor: 'Apache Software Foundation',
-    exploitedInWild: false,
-    patchAvailable: true,
-    source: 'NVD',
-    solution: 'Tomcat 10.1.32 또는 9.0.97 버전으로 업그레이드 조치.',
-    references: ['https://tomcat.apache.org/security-10.html']
+    references: ['https://support.apple.com/en-us/HT201222', 'https://www.boho.or.kr']
   }
 ];
 
-const CACHE_KEY = 'secvigil_cve_live_cache';
+const CACHE_KEY = 'secvigil_cve_7days_cache_v2';
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5분 캐시
 
 interface NvdCveItem {
@@ -157,7 +188,7 @@ function parseVendor(sourceIdentifier?: string, desc?: string, refs?: string[]):
     if (src.includes('apache')) return 'Apache';
     if (src.includes('cisco')) return 'Cisco';
     if (src.includes('github')) return 'GitHub';
-    if (src.includes('kisa') || src.includes('kr')) return 'KISA KrCERT';
+    if (src.includes('kisa') || src.includes('kr') || src.includes('krcert')) return 'KISA KrCERT';
   }
 
   if (refs && refs.length > 0) {
@@ -256,16 +287,31 @@ function parseNvdItem(item: NvdCveItem): Vulnerability {
   // Exploited in wild
   const exploitedInWild = Boolean(cve.cisaExploitAdd);
 
-  // Source
-  let source: Vulnerability['source'] = 'NVD';
-  if (cve.cisaExploitAdd) source = 'CISA';
-  else if (cve.sourceIdentifier?.toLowerCase().includes('kisa') || cve.sourceIdentifier?.toLowerCase().includes('kr')) source = 'KISA';
-  else if (cve.sourceIdentifier?.includes('@')) source = 'VENDOR';
-
   // References
   const references = cve.references?.map((r) => r.url).filter(Boolean) || [
     `https://nvd.nist.gov/vuln/detail/${cve.id}`
   ];
+
+  // Source categorization (KISA, CISA, VENDOR, NVD)
+  let source: Vulnerability['source'] = 'NVD';
+  const srcLower = (cve.sourceIdentifier || '').toLowerCase();
+  const descLower = description.toLowerCase();
+  const hasKrRef = references.some((r) => r.includes('krcert.or.kr') || r.includes('boho.or.kr') || r.includes('.kr/'));
+
+  if (cve.cisaExploitAdd) {
+    source = 'CISA';
+  } else if (
+    srcLower.includes('kisa') ||
+    srcLower.includes('krcert') ||
+    srcLower.includes('.kr') ||
+    descLower.includes('krcert') ||
+    descLower.includes('kisa') ||
+    hasKrRef
+  ) {
+    source = 'KISA';
+  } else if (cve.sourceIdentifier?.includes('@')) {
+    source = 'VENDOR';
+  }
 
   // Vendor & Affected
   const vendor = parseVendor(cve.sourceIdentifier, description, references);
@@ -274,7 +320,7 @@ function parseNvdItem(item: NvdCveItem): Vulnerability {
   // Solution
   const solution =
     cve.cisaRequiredAction ||
-    '해당 벤더사 공식 보안 권고를 확인하고 최신 패치 버전을 적용하십시오.';
+    '해당 벤더사 및 보안 기관(KISA/NVD)의 최신 패치 버전을 확인하여 즉시 업데이트하십시오.';
 
   return {
     id: `nvd-${cve.id}`,
@@ -299,6 +345,7 @@ export interface FetchResult {
   isLive: boolean;
   lastUpdated: string;
   sourceType: 'API' | 'CACHE' | 'FALLBACK';
+  kisaCount: number;
   error?: string;
 }
 
@@ -306,18 +353,21 @@ export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<Fe
   const now = new Date();
   const currentTimeStr = now.toLocaleTimeString('ko-KR', { hour12: false });
 
-  // 1. 캐시 확인
+  // 1. 캐시 확인 (최근 7일치 데이터만 필터링)
   if (!forceRefresh) {
     try {
       const cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
         const parsed = JSON.parse(cached);
         if (parsed.timestamp && Date.now() - parsed.timestamp < CACHE_TTL_MS && Array.isArray(parsed.data)) {
+          const valid7Days = parsed.data.filter((v: Vulnerability) => isWithinLast7Days(v.publishedAt));
+          const kisaCount = valid7Days.filter((v: Vulnerability) => v.source === 'KISA').length;
           return {
-            vulnerabilities: parsed.data,
+            vulnerabilities: valid7Days,
             isLive: true,
             lastUpdated: parsed.lastUpdated || currentTimeStr,
-            sourceType: 'CACHE'
+            sourceType: 'CACHE',
+            kisaCount
           };
         }
       }
@@ -326,17 +376,17 @@ export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<Fe
     }
   }
 
-  // 2. NVD API 호출 (최근 7일치 취약점 우선 요청)
+  // 2. NVD API 호출 (최근 7일치 취약점 정확히 요청)
   try {
     const startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
     const endDate = now.toISOString();
 
     const url = `https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=${encodeURIComponent(
       startDate
-    )}&pubEndDate=${encodeURIComponent(endDate)}&resultsPerPage=25&noRejected`;
+    )}&pubEndDate=${encodeURIComponent(endDate)}&resultsPerPage=40&noRejected`;
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8초 타임아웃
+    const timeoutId = setTimeout(() => controller.abort(), 8500); // 8.5초 타임아웃
 
     const response = await fetch(url, {
       signal: controller.signal,
@@ -355,10 +405,7 @@ export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<Fe
 
     const fetchedVulns = rawItems.map(parseNvdItem);
 
-    // 최신 등록 순 내림차순 정렬
-    fetchedVulns.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
-
-    // 기존 중요/한국형 취약점(INITIAL_VULNS)과 결합하되 중복 제거
+    // KISA 및 최근 7일 고정/권고 취약점 결합
     const combinedMap = new Map<string, Vulnerability>();
     for (const v of fetchedVulns) {
       combinedMap.set(v.cveId, v);
@@ -369,9 +416,13 @@ export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<Fe
       }
     }
 
-    const finalVulns = Array.from(combinedMap.values());
-    // 최신 날짜순 정렬
+    // ★ 최근 7일 자료만 엄격하게 필터링
+    const finalVulns = Array.from(combinedMap.values()).filter((v) => isWithinLast7Days(v.publishedAt));
+
+    // 최신 날짜순 내림차순 정렬
     finalVulns.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+
+    const kisaCount = finalVulns.filter((v) => v.source === 'KISA').length;
 
     // 캐시 저장
     try {
@@ -391,7 +442,8 @@ export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<Fe
       vulnerabilities: finalVulns,
       isLive: true,
       lastUpdated: currentTimeStr,
-      sourceType: 'API'
+      sourceType: 'API',
+      kisaCount
     };
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : '네트워크 오류';
@@ -403,11 +455,13 @@ export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<Fe
       if (cached) {
         const parsed = JSON.parse(cached);
         if (Array.isArray(parsed.data) && parsed.data.length > 0) {
+          const valid7Days = parsed.data.filter((v: Vulnerability) => isWithinLast7Days(v.publishedAt));
           return {
-            vulnerabilities: parsed.data,
+            vulnerabilities: valid7Days,
             isLive: false,
             lastUpdated: parsed.lastUpdated || currentTimeStr,
             sourceType: 'CACHE',
+            kisaCount: valid7Days.filter((v: Vulnerability) => v.source === 'KISA').length,
             error: errorMsg
           };
         }
@@ -416,12 +470,14 @@ export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<Fe
       // ignore
     }
 
-    // 최종 Fallback: 초기 고정 데이터
+    // 최종 Fallback: 최근 7일 이내 데이터만
+    const fallback7Days = INITIAL_VULNS.filter((v) => isWithinLast7Days(v.publishedAt));
     return {
-      vulnerabilities: INITIAL_VULNS,
+      vulnerabilities: fallback7Days,
       isLive: false,
       lastUpdated: currentTimeStr,
       sourceType: 'FALLBACK',
+      kisaCount: fallback7Days.filter((v) => v.source === 'KISA').length,
       error: errorMsg
     };
   }

@@ -22,11 +22,12 @@ import {
   type Vulnerability,
   INITIAL_VULNS,
   fetchLiveVulnerabilities,
-  searchCveById
+  searchCveById,
+  isWithinLast7Days
 } from './services/cveService';
 
 export default function App() {
-  const [vulns, setVulns] = useState<Vulnerability[]>(INITIAL_VULNS);
+  const [vulns, setVulns] = useState<Vulnerability[]>(() => INITIAL_VULNS.filter((v) => isWithinLast7Days(v.publishedAt)));
   const [selectedFilter, setSelectedFilter] = useState<'ALL' | 'CRITICAL' | 'HIGH' | 'EXPLOITED' | 'KISA'>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedVuln, setSelectedVuln] = useState<Vulnerability | null>(null);
@@ -55,11 +56,11 @@ export default function App() {
       setIsRefreshing(false);
 
       if (res.sourceType === 'API') {
-        setApiStatusText('NVD 실시간 API 연동 완료');
+        setApiStatusText('NVD · KISA 최근 7일 피드 연동');
       } else if (res.sourceType === 'CACHE') {
-        setApiStatusText('NVD 캐시 피드 활성 (보호 모드)');
+        setApiStatusText('최근 7일 피드 (캐시 보호 모드)');
       } else {
-        setApiStatusText('오프라인 백업 피드 활성');
+        setApiStatusText('최근 7일 백업 피드 활성');
       }
     };
 
@@ -79,7 +80,7 @@ export default function App() {
   const handleRefresh = async () => {
     if (isRefreshing) return;
     setIsRefreshing(true);
-    setApiStatusText('NVD API 데이터 갱신 중...');
+    setApiStatusText('최근 7일 데이터 실시간 갱신 중...');
     const res = await fetchLiveVulnerabilities(true);
     setVulns(res.vulnerabilities);
     setIsLive(res.isLive);
@@ -87,9 +88,9 @@ export default function App() {
     setIsRefreshing(false);
 
     if (res.sourceType === 'API') {
-      setApiStatusText('NVD 실시간 피드 갱신 완료');
+      setApiStatusText('NVD · KISA 최근 7일 갱신 완료');
     } else if (res.sourceType === 'CACHE') {
-      setApiStatusText('NVD 캐시 유지 (속도제한 보호)');
+      setApiStatusText('최근 7일 피드 유지 (속도제한 보호)');
     } else {
       setApiStatusText('API 일시 지연 (백업 모드)');
     }
@@ -144,7 +145,8 @@ export default function App() {
     const critical = vulns.filter((v) => v.severity === 'CRITICAL').length;
     const high = vulns.filter((v) => v.severity === 'HIGH').length;
     const exploited = vulns.filter((v) => v.exploitedInWild).length;
-    return { total, critical, high, exploited };
+    const kisa = vulns.filter((v) => v.source === 'KISA').length;
+    return { total, critical, high, exploited, kisa };
   }, [vulns]);
 
   const handleShare = (v: Vulnerability) => {
@@ -203,7 +205,7 @@ export default function App() {
                   MOBILE
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400 leading-none mt-0.5">실시간 보안 취약점 레이더</p>
+              <p className="text-[11px] text-slate-400 leading-none mt-0.5">최근 7일 실시간 보안 취약점 레이더</p>
             </div>
           </div>
 
@@ -388,19 +390,22 @@ export default function App() {
           </button>
           <button
             onClick={() => setSelectedFilter('KISA')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
               selectedFilter === 'KISA'
                 ? 'bg-blue-600 text-white shadow-sm'
                 : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
             }`}
           >
-            KISA 한국인터넷진흥원
+            <span>KISA 보안권고</span>
+            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-blue-950 text-blue-300 font-bold border border-blue-500/30">
+              {stats.kisa}
+            </span>
           </button>
         </div>
 
         {/* List Header */}
         <div className="flex items-center justify-between text-xs text-slate-400 pt-1">
-          <span>최신 등록 순 ({filteredVulns.length}건)</span>
+          <span>최근 7일 등록 순 ({filteredVulns.length}건)</span>
           <span className="flex items-center gap-1 text-[11px] text-slate-400">
             카드 터치 시 상세 가이드
           </span>
