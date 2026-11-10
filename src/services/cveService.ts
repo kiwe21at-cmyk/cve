@@ -244,7 +244,10 @@ export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<Fe
       if (payload && Array.isArray(payload.vulnerabilities)) {
         const rawItems: NvdCveItem[] = payload.vulnerabilities;
         const fetchedVulns = rawItems.map(parseNvdItem);
-        const finalVulns = fetchedVulns.filter((v) => isWithinLast7Days(v.publishedAt));
+        let finalVulns = fetchedVulns.filter((v) => isWithinLast7Days(v.publishedAt));
+        if (finalVulns.length === 0 && fetchedVulns.length > 0) {
+          finalVulns = fetchedVulns;
+        }
         finalVulns.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
         const kisaCount = finalVulns.filter((v) => v.source === 'KISA').length;
 
