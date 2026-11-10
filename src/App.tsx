@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
   ShieldAlert,
   ShieldCheck,
@@ -14,134 +14,114 @@ import {
   Share2,
   X,
   Bell,
-  Flame
+  Flame,
+  Radio,
+  Loader2
 } from 'lucide-react';
-
-interface Vulnerability {
-  id: string;
-  cveId: string;
-  title: string;
-  description: string;
-  cvss: number;
-  severity: 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
-  publishedAt: string;
-  affected: string[];
-  vendor: string;
-  exploitedInWild: boolean;
-  patchAvailable: boolean;
-  source: 'KISA' | 'NVD' | 'CISA' | 'VENDOR';
-  solution: string;
-  references: string[];
-}
-
-const INITIAL_VULNS: Vulnerability[] = [
-  {
-    id: 'v1',
-    cveId: 'CVE-2026-24108',
-    title: '리눅스 커널 eBPF 서브시스템 권한 상승 취약점',
-    description: 'Linux 커널의 eBPF 검증기(verifier) 내 경계 검사 오류로 인해 로컬 권한 없는 사용자가 root 권한을 획득할 수 있는 취약점입니다.',
-    cvss: 9.8,
-    severity: 'CRITICAL',
-    publishedAt: '2026-11-07 10:20',
-    affected: ['Linux Kernel 6.1 ~ 6.12', 'Ubuntu 24.04 LTS', 'RHEL 9.x'],
-    vendor: 'Linux Foundation',
-    exploitedInWild: true,
-    patchAvailable: true,
-    source: 'KISA',
-    solution: '커널 버전 6.12.8 이상으로 즉시 업그레이드하고 unprivileged_bpf_disabled 설정을 1로 적용하십시오.',
-    references: ['https://www.boho.or.kr', 'https://nvd.nist.gov/vuln/detail/CVE-2026-24108']
-  },
-  {
-    id: 'v2',
-    cveId: 'CVE-2026-31902',
-    title: 'Google Chrome V8 엔진 원격 코드 실행(RCE) 0-day',
-    description: 'Chrome V8 자바스크립트 엔진의 Type Confusion 버그로 인해 특수 제작된 웹페이지 방문 시 브라우저 샌드박스를 우회하고 악성 코드가 실행될 수 있습니다.',
-    cvss: 8.8,
-    severity: 'HIGH',
-    publishedAt: '2026-11-06 18:45',
-    affected: ['Chrome < 131.0.6778.86', 'Edge < 131.0.2903.70', 'Whale < 3.28'],
-    vendor: 'Google',
-    exploitedInWild: true,
-    patchAvailable: true,
-    source: 'CISA',
-    solution: '모바일 및 데스크톱 브라우저를 최신 업데이트(131.0.6778.86 이상)로 재시작 및 업데이트 적용 권장.',
-    references: ['https://chromereleases.googleblog.com', 'https://www.cisa.gov/known-exploited-vulnerabilities-catalog']
-  },
-  {
-    id: 'v3',
-    cveId: 'CVE-2026-28104',
-    title: 'Spring Framework WebClient SSRF 취약점',
-    description: 'Spring Framework의 WebClient 구현체에서 URL 검증 미흡으로 인해 내부 사설망 서비스에 불법 접근이 가능한 서버 사이드 요청 위조(SSRF) 취약점입니다.',
-    cvss: 7.5,
-    severity: 'HIGH',
-    publishedAt: '2026-11-05 14:10',
-    affected: ['Spring Framework 6.0.0 ~ 6.1.13', 'Spring Boot 3.2.x'],
-    vendor: 'VMware Spring',
-    exploitedInWild: false,
-    patchAvailable: true,
-    source: 'NVD',
-    solution: 'Spring Boot 3.3.5 또는 Spring Framework 6.1.14 이상으로 의존성을 업데이트하십시오.',
-    references: ['https://spring.io/security/cve-2026-28104']
-  },
-  {
-    id: 'v4',
-    cveId: 'CVE-2026-19033',
-    title: 'OpenSSL 취약한 개인키 복원 부채널 공격 취약점',
-    description: 'OpenSSL의 ECDSA 서명 알고리즘 처리 중 타이밍 부채널 정보 누출로 인해 공격자가 비밀키 정보를 복원할 수 있는 위험이 보고되었습니다.',
-    cvss: 5.9,
-    severity: 'MEDIUM',
-    publishedAt: '2026-11-04 09:30',
-    affected: ['OpenSSL 3.0.0 ~ 3.0.15', 'OpenSSL 3.3.0 ~ 3.3.2'],
-    vendor: 'OpenSSL Project',
-    exploitedInWild: false,
-    patchAvailable: true,
-    source: 'VENDOR',
-    solution: 'OpenSSL 3.3.3 버전 이상 보안 패치 적용.',
-    references: ['https://www.openssl.org/news/secadv/']
-  },
-  {
-    id: 'v5',
-    cveId: 'CVE-2026-30211',
-    title: 'Apple iOS / iPadOS WebKit 메모리 손상 취약점',
-    description: '모바일 사파리 및 WebKit 기반 앱에서 웹 콘텐츠 처리 중 발생하는 Use-After-Free 취약점으로, 임의 코드 실행 위험이 존재합니다.',
-    cvss: 9.1,
-    severity: 'CRITICAL',
-    publishedAt: '2026-11-03 21:00',
-    affected: ['iOS < 18.1.1', 'iPadOS < 18.1.1', 'macOS Sequoia < 15.1.1'],
-    vendor: 'Apple',
-    exploitedInWild: true,
-    patchAvailable: true,
-    source: 'KISA',
-    solution: 'iOS 18.1.1 또는 iPadOS 18.1.1 소프트웨어 최신 업데이트 수행.',
-    references: ['https://support.apple.com/en-us/HT201222']
-  },
-  {
-    id: 'v6',
-    cveId: 'CVE-2026-27150',
-    title: 'Apache Tomcat HTTP/2 DoS 서비스 거부 취약점',
-    description: '과도한 HTTP/2 스트림 요청 제어 결함으로 인해 Tomcat 데몬의 CPU 점유율이 100%에 달하여 서비스 거부 상태를 유발할 수 있습니다.',
-    cvss: 6.5,
-    severity: 'MEDIUM',
-    publishedAt: '2026-11-02 11:20',
-    affected: ['Apache Tomcat 9.0.80 ~ 9.0.96', '10.1.0 ~ 10.1.31'],
-    vendor: 'Apache Software Foundation',
-    exploitedInWild: false,
-    patchAvailable: true,
-    source: 'NVD',
-    solution: 'Tomcat 10.1.32 또는 9.0.97 버전으로 업그레이드 조치.',
-    references: ['https://tomcat.apache.org/security-10.html']
-  }
-];
+import {
+  type Vulnerability,
+  INITIAL_VULNS,
+  fetchLiveVulnerabilities,
+  searchCveById
+} from './services/cveService';
 
 export default function App() {
+  const [vulns, setVulns] = useState<Vulnerability[]>(INITIAL_VULNS);
   const [selectedFilter, setSelectedFilter] = useState<'ALL' | 'CRITICAL' | 'HIGH' | 'EXPLOITED' | 'KISA'>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedVuln, setSelectedVuln] = useState<Vulnerability | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  // 실시간 API 연동 상태
+  const [isLive, setIsLive] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState('초기화 중...');
+  const [apiStatusText, setApiStatusText] = useState('NVD 실시간 API 연결 중...');
+  const [isSearchingApi, setIsSearchingApi] = useState(false);
+  const [searchNotice, setSearchNotice] = useState<string | null>(null);
+
+  // 초기 로드 및 5분 주기 백그라운드 자동 갱신
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadData = async (force = false) => {
+      setIsRefreshing(true);
+      const res = await fetchLiveVulnerabilities(force);
+      if (!isMounted) return;
+
+      setVulns(res.vulnerabilities);
+      setIsLive(res.isLive);
+      setLastUpdated(res.lastUpdated);
+      setIsRefreshing(false);
+
+      if (res.sourceType === 'API') {
+        setApiStatusText('NVD 실시간 API 연동 완료');
+      } else if (res.sourceType === 'CACHE') {
+        setApiStatusText('NVD 캐시 피드 활성 (보호 모드)');
+      } else {
+        setApiStatusText('오프라인 백업 피드 활성');
+      }
+    };
+
+    loadData(false);
+
+    // 5분마다 실시간 갱신
+    const timer = setInterval(() => {
+      loadData(false);
+    }, 5 * 60 * 1000);
+
+    return () => {
+      isMounted = false;
+      clearInterval(timer);
+    };
+  }, []);
+
+  const handleRefresh = async () => {
+    if (isRefreshing) return;
+    setIsRefreshing(true);
+    setApiStatusText('NVD API 데이터 갱신 중...');
+    const res = await fetchLiveVulnerabilities(true);
+    setVulns(res.vulnerabilities);
+    setIsLive(res.isLive);
+    setLastUpdated(res.lastUpdated);
+    setIsRefreshing(false);
+
+    if (res.sourceType === 'API') {
+      setApiStatusText('NVD 실시간 피드 갱신 완료');
+    } else if (res.sourceType === 'CACHE') {
+      setApiStatusText('NVD 캐시 유지 (속도제한 보호)');
+    } else {
+      setApiStatusText('API 일시 지연 (백업 모드)');
+    }
+  };
+
+  const handleDirectSearch = async () => {
+    const q = searchQuery.trim();
+    if (!q) return;
+
+    setIsSearchingApi(true);
+    setSearchNotice(`NVD 데이터베이스에서 "${q}" 검색 중...`);
+    const found = await searchCveById(q);
+    setIsSearchingApi(false);
+
+    if (found) {
+      setVulns((prev) => {
+        if (prev.some((v) => v.cveId === found.cveId)) return prev;
+        return [found, ...prev];
+      });
+      setSelectedVuln(found);
+      setSearchNotice(`${found.cveId} 조회 성공`);
+    } else {
+      setSearchNotice(`"${q}"에 해당하는 CVE를 NVD에서 찾지 못했습니다.`);
+    }
+
+    setTimeout(() => {
+      setSearchNotice(null);
+    }, 3500);
+  };
+
   const filteredVulns = useMemo(() => {
-    return INITIAL_VULNS.filter((v) => {
+    return vulns.filter((v) => {
       if (selectedFilter === 'CRITICAL' && v.severity !== 'CRITICAL') return false;
       if (selectedFilter === 'HIGH' && v.severity !== 'HIGH') return false;
       if (selectedFilter === 'EXPLOITED' && !v.exploitedInWild) return false;
@@ -157,22 +137,15 @@ export default function App() {
       }
       return true;
     });
-  }, [selectedFilter, searchQuery]);
+  }, [vulns, selectedFilter, searchQuery]);
 
   const stats = useMemo(() => {
-    const total = INITIAL_VULNS.length;
-    const critical = INITIAL_VULNS.filter((v) => v.severity === 'CRITICAL').length;
-    const high = INITIAL_VULNS.filter((v) => v.severity === 'HIGH').length;
-    const exploited = INITIAL_VULNS.filter((v) => v.exploitedInWild).length;
+    const total = vulns.length;
+    const critical = vulns.filter((v) => v.severity === 'CRITICAL').length;
+    const high = vulns.filter((v) => v.severity === 'HIGH').length;
+    const exploited = vulns.filter((v) => v.exploitedInWild).length;
     return { total, critical, high, exploited };
-  }, []);
-
-  const handleRefresh = () => {
-    setIsRefreshing(true);
-    setTimeout(() => {
-      setIsRefreshing(false);
-    }, 600);
-  };
+  }, [vulns]);
 
   const handleShare = (v: Vulnerability) => {
     const text = `[보안 취약점 긴급공지]\n${v.cveId} (${v.severity} / CVSS ${v.cvss})\n${v.title}\n조치: ${v.solution}`;
@@ -237,8 +210,10 @@ export default function App() {
           <div className="flex items-center gap-1.5">
             <button
               onClick={handleRefresh}
-              className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all active:scale-95"
+              disabled={isRefreshing}
+              className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all active:scale-95 disabled:opacity-60"
               aria-label="새로고침"
+              title="실시간 API 새로고침"
             >
               <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin text-indigo-400' : ''}`} />
             </button>
@@ -253,12 +228,22 @@ export default function App() {
 
         {/* Live Status Banner */}
         <div className="mt-3 flex items-center justify-between bg-slate-800/80 rounded-xl px-3 py-1.5 border border-slate-700/60 text-[11px]">
-          <span className="flex items-center gap-1.5 text-emerald-400 font-medium">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-            KISA · NVD 실시간 피드 연동
+          <span className="flex items-center gap-1.5 font-medium">
+            <Radio className={`w-3.5 h-3.5 ${isLive ? 'text-emerald-400 animate-pulse' : 'text-amber-400'}`} />
+            <span className={isLive ? 'text-emerald-400' : 'text-amber-300'}>{apiStatusText}</span>
           </span>
-          <span className="text-slate-400">최신 갱신됨</span>
+          <span className="text-slate-400 text-[10px] flex items-center gap-1">
+            <Clock className="w-2.5 h-2.5" />
+            {lastUpdated}
+          </span>
         </div>
+
+        {/* Search Notice Bar */}
+        {searchNotice && (
+          <div className="mt-2 text-center text-xs px-2.5 py-1 bg-indigo-950/80 border border-indigo-500/40 text-indigo-300 rounded-lg animate-fade-in">
+            {searchNotice}
+          </div>
+        )}
       </header>
 
       {/* Main Content Area */}
@@ -312,21 +297,49 @@ export default function App() {
         </div>
 
         {/* Search Bar */}
-        <div className="relative">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-          <input
-            type="text"
-            placeholder="CVE 번호, 소프트웨어(Chrome, Linux, iOS) 검색"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-slate-900 text-sm text-slate-100 placeholder-slate-400 pl-9 pr-8 py-2.5 rounded-xl border border-slate-800 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
-          />
-          {searchQuery && (
+        <div className="space-y-1.5">
+          <div className="relative">
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              placeholder="CVE 번호, 제품(WordPress, Linux, Chrome) 검색"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && searchQuery.toUpperCase().startsWith('CVE-')) {
+                  handleDirectSearch();
+                }
+              }}
+              className="w-full bg-slate-900 text-sm text-slate-100 placeholder-slate-400 pl-9 pr-8 py-2.5 rounded-xl border border-slate-800 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 p-0.5"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+
+          {/* CVE 직접 검색 지원 버튼 */}
+          {searchQuery.toUpperCase().startsWith('CVE-') && (
             <button
-              onClick={() => setSearchQuery('')}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 p-0.5"
+              onClick={handleDirectSearch}
+              disabled={isSearchingApi}
+              className="w-full py-1.5 px-3 rounded-xl bg-indigo-950/60 hover:bg-indigo-900/60 border border-indigo-500/40 text-indigo-300 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all"
             >
-              <X className="w-3.5 h-3.5" />
+              {isSearchingApi ? (
+                <>
+                  <Loader2 className="w-3.5 h-3.5 animate-spin text-indigo-400" />
+                  <span>NVD 데이터베이스 검색 중...</span>
+                </>
+              ) : (
+                <>
+                  <Search className="w-3.5 h-3.5 text-indigo-400" />
+                  <span>NVD에서 <strong>{searchQuery.trim().toUpperCase()}</strong> 직접 검색</span>
+                </>
+              )}
             </button>
           )}
         </div>
