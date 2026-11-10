@@ -13,16 +13,37 @@ import {
   CheckCircle2,
   Share2,
   X,
-  Bell,
+  Filter,
   Flame,
   Radio,
-  Loader2
+  Loader2,
+  Tags,
+  Check
 } from 'lucide-react';
 import {
   type Vulnerability,
   fetchLiveVulnerabilities,
   searchCveById
 } from './services/cveService';
+
+const OS_TAGS = ['Linux', 'Windows', 'macOS', 'Android', 'iOS', 'Red Hat', 'Ubuntu', 'Debian'];
+const SOFTWARE_TAGS = [
+  'WordPress',
+  'Apache',
+  'Nginx',
+  'Chrome',
+  'Microsoft',
+  'Oracle',
+  'Cisco',
+  'GitHub',
+  'Google',
+  'Apple',
+  'Docker',
+  'MySQL',
+  'PHP',
+  'Node.js'
+];
+const ALL_DEFAULT_TAGS = [...OS_TAGS, ...SOFTWARE_TAGS];
 
 export default function App() {
   const [vulns, setVulns] = useState<Vulnerability[]>([]);
@@ -33,12 +54,38 @@ export default function App() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  // 태그 설정 모달 및 선택된 태그 상태
+  const [selectedTags, setSelectedTags] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem('secvigil_selected_tags');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch {
+      // ignore
+    }
+    return ALL_DEFAULT_TAGS;
+  });
+  const [isTagModalOpen, setIsTagModalOpen] = useState(false);
+
   // 실시간 API 연동 상태
   const [isLive, setIsLive] = useState(false);
   const [lastUpdated, setLastUpdated] = useState('초기화 중...');
   const [apiStatusText, setApiStatusText] = useState('VulnCheck API 연결 중...');
   const [isSearchingApi, setIsSearchingApi] = useState(false);
   const [searchNotice, setSearchNotice] = useState<string | null>(null);
+
+  // 동적 벤더 추출
+  const dynamicVendors = useMemo(() => {
+    const set = new Set<string>();
+    vulns.forEach((v) => {
+      if (v.vendor && !ALL_DEFAULT_TAGS.includes(v.vendor)) {
+        set.add(v.vendor);
+      }
+    });
+    return Array.from(set).slice(0, 15);
+  }, [vulns]);
 
   // 초기 로드 및 5분 주기 백그라운드 자동 갱신
   useEffect(() => {
@@ -128,6 +175,19 @@ export default function App() {
       if (selectedFilter === 'EXPLOITED' && !v.exploitedInWild) return false;
       if (selectedFilter === 'KISA' && v.source !== 'KISA') return false;
 
+      // 태그 필터링 (선택된 OS/소프트웨어 태그 중 하나 이상과 매칭되어야 함)
+      if (selectedTags.length > 0) {
+        const matchesTag = selectedTags.some((tag) => {
+          const tLower = tag.toLowerCase();
+          const vendorMatch = v.vendor.toLowerCase().includes(tLower);
+          const affectedMatch = v.affected.some((a) => a.toLowerCase().includes(tLower));
+          const titleMatch = v.title.toLowerCase().includes(tLower);
+          const descMatch = v.description.toLowerCase().includes(tLower);
+          return vendorMatch || affectedMatch || titleMatch || descMatch;
+        });
+        if (!matchesTag) return false;
+      }
+
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase();
         const matchesCve = v.cveId.toLowerCase().includes(query);
@@ -138,7 +198,7 @@ export default function App() {
       }
       return true;
     });
-  }, [vulns, selectedFilter, searchQuery]);
+  }, [vulns, selectedFilter, searchQuery, selectedTags]);
 
   const stats = useMemo(() => {
     const total = vulns.length;
@@ -219,12 +279,17 @@ export default function App() {
             >
               <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin text-indigo-400' : ''}`} />
             </button>
-            <div className="relative">
-              <button className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all active:scale-95">
-                <Bell className="w-4 h-4 text-slate-300" />
-              </button>
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
-            </div>
+            <button
+              onClick={() => setIsTagModalOpen(true)}
+              className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all active:scale-95 relative group"
+              aria-label="필터 설정"
+              title="OS 및 소프트웨어 태그 필터 설정"
+            >
+              <Filter className="w-4 h-4 text-slate-300 group-hover:text-indigo-400 transition-colors" />
+              {selectedTags.length > 0 && (
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
+              )}
+            </button>
           </div>
         </div>
 
@@ -250,6 +315,20 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-1 px-4 pt-3 space-y-4">
+        {/* Tag Filter Settings Button */}
+        <button
+          onClick={() => setIsTagModalOpen(true)}
+          className="w-full py-2.5 px-3.5 rounded-xl bg-slate-900 hover:bg-slate-850 border border-slate-800 text-slate-300 text-xs font-medium flex items-center justify-between transition-all shadow-md group"
+        >
+          <span className="flex items-center gap-2">
+            <Tags className="w-4 h-4 text-indigo-400 group-hover:scale-110 transition-transform" />
+            <span>OS 및 소프트웨어 태그 설정</span>
+          </span>
+          <span className="px-2.5 py-0.5 rounded-lg bg-indigo-500/10 text-indigo-400 text-[11px] font-bold border border-indigo-500/25">
+            {selectedTags.length}개 태그 활성
+          </span>
+        </button>
+
         {/* Quick Stats Grid */}
         <div className="grid grid-cols-4 gap-2">
           <div
@@ -405,7 +484,7 @@ export default function App() {
 
         {/* List Header */}
         <div className="flex items-center justify-between text-xs text-slate-400 pt-1">
-          <span>최근 7일 등록 순 ({filteredVulns.length}건)</span>
+          <span>선택된 태그 필터 결과 ({filteredVulns.length}건)</span>
           <span className="flex items-center gap-1 text-[11px] text-slate-400">
             카드 터치 시 상세 가이드
           </span>
@@ -422,10 +501,18 @@ export default function App() {
               </p>
             </div>
           ) : filteredVulns.length === 0 ? (
-            <div className="p-8 text-center bg-slate-900/60 rounded-2xl border border-slate-800 space-y-2">
+            <div className="p-8 text-center bg-slate-900/60 rounded-2xl border border-slate-800 space-y-3">
               <ShieldCheck className="w-10 h-10 text-slate-500 mx-auto" />
-              <p className="text-sm font-semibold text-slate-300">검색 조건에 맞는 취약점이 없습니다.</p>
-              <p className="text-xs text-slate-500">검색어를 바꾸거나 필터를 전체로 변경해 보세요.</p>
+              <p className="text-sm font-semibold text-slate-300">선택된 태그에 해당하는 취약점이 없습니다.</p>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                상단의 <strong>'OS 및 소프트웨어 태그 설정'</strong> 버튼을 눌러 더 많은 태그를 선택하거나 검색어를 변경해 보세요.
+              </p>
+              <button
+                onClick={() => setSelectedTags(ALL_DEFAULT_TAGS)}
+                className="mt-2 py-1.5 px-3 rounded-xl bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-300 text-xs font-semibold border border-indigo-500/40 transition-all"
+              >
+                모든 기본 태그 활성화
+              </button>
             </div>
           ) : (
             filteredVulns.map((vuln) => (
@@ -487,6 +574,200 @@ export default function App() {
           )}
         </div>
       </main>
+
+      {/* Tag Settings Modal */}
+      {isTagModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4">
+          <div
+            className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="p-4 border-b border-slate-800 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-indigo-500/15 flex items-center justify-center text-indigo-400 border border-indigo-500/30">
+                  <Tags className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-white">태그 설정 (OS / 소프트웨어)</h3>
+                  <p className="text-[11px] text-slate-400">관심 있는 태그만 선택하여 모니터링하세요.</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setIsTagModalOpen(false)}
+                className="p-1.5 rounded-full bg-slate-800 text-slate-400 hover:text-white transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-4 space-y-4 overflow-y-auto flex-1 text-xs">
+              {/* Quick Actions */}
+              <div className="flex items-center justify-between pb-2 border-b border-slate-800 text-[11px]">
+                <span className="text-slate-400">
+                  선택된 태그: <strong className="text-indigo-400">{selectedTags.length}개</strong>
+                </span>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setSelectedTags([...OS_TAGS, ...SOFTWARE_TAGS, ...dynamicVendors])}
+                    className="text-indigo-400 hover:underline font-semibold"
+                  >
+                    전체 선택
+                  </button>
+                  <span className="text-slate-700">|</span>
+                  <button
+                    onClick={() => setSelectedTags([])}
+                    className="text-slate-400 hover:underline font-semibold"
+                  >
+                    전체 해제
+                  </button>
+                </div>
+              </div>
+
+              {/* OS Tags Section */}
+              <div className="space-y-2">
+                <h4 className="font-bold text-slate-300 text-xs flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-indigo-500" />
+                  운영체제 (OS) 태그
+                </h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {OS_TAGS.map((tag) => {
+                    const isSelected = selectedTags.includes(tag);
+                    return (
+                      <button
+                        key={tag}
+                        onClick={() => {
+                          if (isSelected) {
+                            setSelectedTags(selectedTags.filter((t) => t !== tag));
+                          } else {
+                            setSelectedTags([...selectedTags, tag]);
+                          }
+                        }}
+                        className={`p-2.5 rounded-xl border text-left flex items-center justify-between transition-all ${
+                          isSelected
+                            ? 'bg-indigo-950/50 border-indigo-500/60 text-white shadow-sm'
+                            : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:border-slate-700'
+                        }`}
+                      >
+                        <span className="font-medium truncate">{tag}</span>
+                        <div
+                          className={`w-4 h-4 rounded flex items-center justify-center border ${
+                            isSelected
+                              ? 'bg-indigo-600 border-indigo-500 text-white'
+                              : 'bg-slate-900 border-slate-700 text-transparent'
+                          }`}
+                        >
+                          <Check className="w-3 h-3" />
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Software Tags Section */}
+              <div className="space-y-2 pt-2">
+                <h4 className="font-bold text-slate-300 text-xs flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                  소프트웨어 / 벤더 태그
+                </h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {SOFTWARE_TAGS.map((tag) => {
+                    const isSelected = selectedTags.includes(tag);
+                    return (
+                      <button
+                        key={tag}
+                        onClick={() => {
+                          if (isSelected) {
+                            setSelectedTags(selectedTags.filter((t) => t !== tag));
+                          } else {
+                            setSelectedTags([...selectedTags, tag]);
+                          }
+                        }}
+                        className={`p-2.5 rounded-xl border text-left flex items-center justify-between transition-all ${
+                          isSelected
+                            ? 'bg-emerald-950/50 border-emerald-500/60 text-white shadow-sm'
+                            : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:border-slate-700'
+                        }`}
+                      >
+                        <span className="font-medium truncate">{tag}</span>
+                        <div
+                          className={`w-4 h-4 rounded flex items-center justify-center border ${
+                            isSelected
+                              ? 'bg-emerald-600 border-emerald-500 text-white'
+                              : 'bg-slate-900 border-slate-700 text-transparent'
+                          }`}
+                        >
+                          <Check className="w-3 h-3" />
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Dynamic Vendors from current vulns */}
+              {dynamicVendors.length > 0 && (
+                <div className="space-y-2 pt-2">
+                  <h4 className="font-bold text-slate-300 text-xs flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-amber-500" />
+                    기타 감지된 벤더/제품 태그
+                  </h4>
+                  <div className="flex flex-wrap gap-1.5">
+                    {dynamicVendors.map((tag) => {
+                      const isSelected = selectedTags.includes(tag);
+                      return (
+                        <button
+                          key={tag}
+                          onClick={() => {
+                            if (isSelected) {
+                              setSelectedTags(selectedTags.filter((t) => t !== tag));
+                            } else {
+                              setSelectedTags([...selectedTags, tag]);
+                            }
+                          }}
+                          className={`px-3 py-1.5 rounded-xl border text-xs font-medium transition-all flex items-center gap-1.5 ${
+                            isSelected
+                              ? 'bg-amber-950/50 border-amber-500/60 text-amber-200'
+                              : 'bg-slate-950/60 border-slate-800 text-slate-400'
+                          }`}
+                        >
+                          <span>{tag}</span>
+                          {isSelected && <Check className="w-3 h-3 text-amber-400" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 border-t border-slate-800 bg-slate-900/95 flex gap-2">
+              <button
+                onClick={() => {
+                  try {
+                    localStorage.setItem('secvigil_selected_tags', JSON.stringify(selectedTags));
+                  } catch {
+                    // ignore
+                  }
+                  setIsTagModalOpen(false);
+                }}
+                className="flex-1 py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 active:scale-95 transition-all"
+              >
+                적용하기 ({selectedTags.length}개 태그 필터 적용)
+              </button>
+              <button
+                onClick={() => setIsTagModalOpen(false)}
+                className="py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs active:scale-95 transition-all"
+              >
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Detail Modal / Bottom Sheet */}
       {selectedVuln && (
