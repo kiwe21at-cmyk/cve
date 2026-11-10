@@ -14,8 +14,7 @@ import {
   Share2,
   X,
   Bell,
-  Flame,
-  Activity
+  Flame
 } from 'lucide-react';
 
 interface Vulnerability {
@@ -135,7 +134,6 @@ const INITIAL_VULNS: Vulnerability[] = [
 ];
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'feed' | 'stats' | 'notice'>('feed');
   const [selectedFilter, setSelectedFilter] = useState<'ALL' | 'CRITICAL' | 'HIGH' | 'EXPLOITED' | 'KISA'>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedVuln, setSelectedVuln] = useState<Vulnerability | null>(null);
@@ -217,7 +215,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col max-w-md mx-auto relative shadow-2xl pb-24 font-sans select-none">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col max-w-md mx-auto relative shadow-2xl pb-8 font-sans select-none">
       {/* Top Header */}
       <header className="sticky top-0 z-30 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 pt-4 pb-3">
         <div className="flex items-center justify-between">
@@ -589,39 +587,6 @@ export default function App() {
           </div>
         </div>
       )}
-
-      {/* Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 z-30 max-w-md mx-auto bg-slate-900/95 backdrop-blur-lg border-t border-slate-800 px-8 py-3 flex items-center justify-between text-[11px] font-medium text-slate-400">
-        <button
-          onClick={() => setActiveTab('feed')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            activeTab === 'feed' ? 'text-indigo-400 font-bold' : 'hover:text-slate-200'
-          }`}
-        >
-          <ShieldAlert className="w-5 h-5" />
-          <span>취약점 피드</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab('stats')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            activeTab === 'stats' ? 'text-indigo-400 font-bold' : 'hover:text-slate-200'
-          }`}
-        >
-          <Activity className="w-5 h-5" />
-          <span>위협 통계</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab('notice')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            activeTab === 'notice' ? 'text-indigo-400 font-bold' : 'hover:text-slate-200'
-          }`}
-        >
-          <Info className="w-5 h-5" />
-          <span>KISA 권고문</span>
-        </button>
-      </nav>
     </div>
   );
 }
