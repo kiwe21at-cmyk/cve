@@ -43,7 +43,21 @@ const SOFTWARE_TAGS = [
   'PHP',
   'Node.js'
 ];
-const ALL_DEFAULT_TAGS = [...OS_TAGS, ...SOFTWARE_TAGS];
+const LANGUAGE_TAGS = [
+  'Java',
+  'PHP',
+  'JavaScript',
+  'TypeScript',
+  'Python',
+  'Ruby',
+  'Go',
+  'C++',
+  'Vue',
+  'React',
+  'Spring Boot',
+  'Spring Framework'
+];
+const ALL_DEFAULT_TAGS = [...OS_TAGS, ...SOFTWARE_TAGS, ...LANGUAGE_TAGS];
 
 export default function App() {
   const [vulns, setVulns] = useState<Vulnerability[]>([]);
@@ -168,14 +182,8 @@ export default function App() {
     }, 3500);
   };
 
-  const filteredVulns = useMemo(() => {
+  const tagFilteredVulns = useMemo(() => {
     return vulns.filter((v) => {
-      if (selectedFilter === 'CRITICAL' && v.severity !== 'CRITICAL') return false;
-      if (selectedFilter === 'HIGH' && v.severity !== 'HIGH') return false;
-      if (selectedFilter === 'EXPLOITED' && !v.exploitedInWild) return false;
-      if (selectedFilter === 'KISA' && v.source !== 'KISA') return false;
-
-      // 태그 필터링 (선택된 OS/소프트웨어 태그 중 하나 이상과 매칭되어야 함)
       if (selectedTags.length > 0) {
         const matchesTag = selectedTags.some((tag) => {
           const tLower = tag.toLowerCase();
@@ -187,6 +195,16 @@ export default function App() {
         });
         if (!matchesTag) return false;
       }
+      return true;
+    });
+  }, [vulns, selectedTags]);
+
+  const filteredVulns = useMemo(() => {
+    return tagFilteredVulns.filter((v) => {
+      if (selectedFilter === 'CRITICAL' && v.severity !== 'CRITICAL') return false;
+      if (selectedFilter === 'HIGH' && v.severity !== 'HIGH') return false;
+      if (selectedFilter === 'EXPLOITED' && !v.exploitedInWild) return false;
+      if (selectedFilter === 'KISA' && v.source !== 'KISA') return false;
 
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase();
@@ -198,16 +216,16 @@ export default function App() {
       }
       return true;
     });
-  }, [vulns, selectedFilter, searchQuery, selectedTags]);
+  }, [tagFilteredVulns, selectedFilter, searchQuery]);
 
   const stats = useMemo(() => {
-    const total = vulns.length;
-    const critical = vulns.filter((v) => v.severity === 'CRITICAL').length;
-    const high = vulns.filter((v) => v.severity === 'HIGH').length;
-    const exploited = vulns.filter((v) => v.exploitedInWild).length;
-    const kisa = vulns.filter((v) => v.source === 'KISA').length;
+    const total = tagFilteredVulns.length;
+    const critical = tagFilteredVulns.filter((v) => v.severity === 'CRITICAL').length;
+    const high = tagFilteredVulns.filter((v) => v.severity === 'HIGH').length;
+    const exploited = tagFilteredVulns.filter((v) => v.exploitedInWild).length;
+    const kisa = tagFilteredVulns.filter((v) => v.source === 'KISA').length;
     return { total, critical, high, exploited, kisa };
-  }, [vulns]);
+  }, [tagFilteredVulns]);
 
   const handleShare = (v: Vulnerability) => {
     const text = `[보안 취약점 긴급공지]\n${v.cveId} (${v.severity} / CVSS ${v.cvss})\n${v.title}\n조치: ${v.solution}`;
@@ -610,7 +628,7 @@ export default function App() {
                 </span>
                 <div className="flex gap-2">
                   <button
-                    onClick={() => setSelectedTags([...OS_TAGS, ...SOFTWARE_TAGS, ...dynamicVendors])}
+                    onClick={() => setSelectedTags([...OS_TAGS, ...SOFTWARE_TAGS, ...LANGUAGE_TAGS, ...dynamicVendors])}
                     className="text-indigo-400 hover:underline font-semibold"
                   >
                     전체 선택
@@ -696,6 +714,47 @@ export default function App() {
                           className={`w-4 h-4 rounded flex items-center justify-center border ${
                             isSelected
                               ? 'bg-emerald-600 border-emerald-500 text-white'
+                              : 'bg-slate-900 border-slate-700 text-transparent'
+                          }`}
+                        >
+                          <Check className="w-3 h-3" />
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Development Language / Framework Tags Section */}
+              <div className="space-y-2 pt-2">
+                <h4 className="font-bold text-slate-300 text-xs flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-purple-500" />
+                  개발 언어 / 프레임워크 태그
+                </h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {LANGUAGE_TAGS.map((tag) => {
+                    const isSelected = selectedTags.includes(tag);
+                    return (
+                      <button
+                        key={tag}
+                        onClick={() => {
+                          if (isSelected) {
+                            setSelectedTags(selectedTags.filter((t) => t !== tag));
+                          } else {
+                            setSelectedTags([...selectedTags, tag]);
+                          }
+                        }}
+                        className={`p-2.5 rounded-xl border text-left flex items-center justify-between transition-all ${
+                          isSelected
+                            ? 'bg-purple-950/50 border-purple-500/60 text-white shadow-sm'
+                            : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:border-slate-700'
+                        }`}
+                      >
+                        <span className="font-medium truncate">{tag}</span>
+                        <div
+                          className={`w-4 h-4 rounded flex items-center justify-center border ${
+                            isSelected
+                              ? 'bg-purple-600 border-purple-500 text-white'
                               : 'bg-slate-900 border-slate-700 text-transparent'
                           }`}
                         >

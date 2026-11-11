@@ -13,7 +13,13 @@ async function buildFeed() {
     console.warn('Warning: VULNCHECK_API_KEY environment variable is missing. Generating fallback cves.json for local environment.');
     const fallbackPayload = {
       timestamp: Date.now(),
-      lastUpdated: new Date().toLocaleTimeString('ko-KR', { hour12: false }),
+      lastUpdated: new Intl.DateTimeFormat('ko-KR', {
+        timeZone: 'Asia/Seoul',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      }).format(new Date()),
       vulnerabilities: []
     };
     fs.mkdirSync(path.dirname(CACHE_FILE), { recursive: true });
@@ -46,7 +52,13 @@ async function buildFeed() {
 
   const payload = {
     timestamp: Date.now(),
-    lastUpdated: now.toLocaleTimeString('ko-KR', { hour12: false }),
+    lastUpdated: new Intl.DateTimeFormat('ko-KR', {
+      timeZone: 'Asia/Seoul',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    }).format(now),
     vulnerabilities: rawItems
   };
 

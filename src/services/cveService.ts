@@ -15,6 +15,37 @@ export interface Vulnerability {
   references: string[];
 }
 
+export function formatToKst(isoString: string): string {
+  try {
+    const date = new Date(isoString);
+    if (isNaN(date.getTime())) return isoString;
+    const formatter = new Intl.DateTimeFormat('ko-KR', {
+      timeZone: 'Asia/Seoul',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    });
+    const parts = formatter.formatToParts(date);
+    let year = '', month = '', day = '', hour = '', minute = '';
+    for (const p of parts) {
+      if (p.type === 'year') year = p.value;
+      if (p.type === 'month') month = p.value;
+      if (p.type === 'day') day = p.value;
+      if (p.type === 'hour') hour = p.value;
+      if (p.type === 'minute') minute = p.value;
+    }
+    if (year && month && day) {
+      return `${year}-${month}-${day} ${hour || '00'}:${minute || '00'}`;
+    }
+    return date.toISOString().replace('T', ' ').slice(0, 16);
+  } catch {
+    return isoString;
+  }
+}
+
 export function isWithinLast7Days(publishedAt: string): boolean {
   try {
     const datePart = publishedAt.split(' ')[0];
@@ -161,11 +192,9 @@ function parseNvdItem(item: NvdCveItem): Vulnerability {
     title = `[${cwe}] ${title}`;
   }
 
-  // 등록 일자
+  // 등록 일자 (KST 기준 변환)
   const rawDate = cve.published || new Date().toISOString();
-  const datePart = rawDate.split('T')[0];
-  const timePart = (rawDate.split('T')[1] || '00:00').slice(0, 5);
-  const publishedAt = `${datePart} ${timePart}`;
+  const publishedAt = formatToKst(rawDate);
 
   // 악용 여부
   const exploitedInWild = Boolean(cve.cisaExploitAdd);
@@ -234,7 +263,13 @@ export interface FetchResult {
 
 export async function fetchLiveVulnerabilities(forceRefresh = false): Promise<FetchResult> {
   const now = new Date();
-  const currentTimeStr = now.toLocaleTimeString('ko-KR', { hour12: false });
+  const currentTimeStr = new Intl.DateTimeFormat('ko-KR', {
+    timeZone: 'Asia/Seoul',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false
+  }).format(now);
 
   try {
     const jsonUrl = forceRefresh ? `./cves.json?t=${Date.now()}` : './cves.json';
