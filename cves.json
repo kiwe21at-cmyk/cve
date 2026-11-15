@@ -1,1451 +1,7 @@
 {
-  "timestamp": 1794725156841,
-  "lastUpdated": "15:45:56",
+  "timestamp": 1794745978993,
+  "lastUpdated": "21:32:58",
   "vulnerabilities": [
-    {
-      "cve": {
-        "id": "CVE-2026-124326",
-        "sourceIdentifier": "cna@vuldb.com",
-        "vulnStatus": "Deferred",
-        "published": "2026-11-08T10:16:51.850",
-        "lastModified": "2026-11-13T04:17:39.017",
-        "descriptions": [
-          {
-            "lang": "en",
-            "value": "A flaw has been found in DataLinkDC Dinky up to 1.2.5. Impacted is the function file.getOriginalFilename of the file CatalogueController.java of the component Catalogue Upload. Executing a manipulation of the argument filename can lead to path traversal. The attack can be executed remotely. The exploit has been published and may be used. The researcher claims to have submitted a GHSA on the repository of the project."
-          }
-        ],
-        "references": [
-          {
-            "url": "https://github.com/DataLinkDC/dinky/",
-            "source": "cna@vuldb.com"
-          },
-          {
-            "url": "https://github.com/DataLinkDC/dinky/security/advisories/GHSA-2jp7-3h24-h6r7",
-            "source": "cna@vuldb.com"
-          },
-          {
-            "url": "https://vuldb.com/cve/CVE-2026-124326",
-            "source": "cna@vuldb.com"
-          },
-          {
-            "url": "https://vuldb.com/submit/1015958",
-            "source": "cna@vuldb.com"
-          },
-          {
-            "url": "https://vuldb.com/vuln/432647",
-            "source": "cna@vuldb.com"
-          },
-          {
-            "url": "https://vuldb.com/vuln/432647/cti",
-            "source": "cna@vuldb.com"
-          }
-        ],
-        "weaknesses": [
-          {
-            "source": "cna@vuldb.com",
-            "type": "Secondary",
-            "description": [
-              {
-                "lang": "en",
-                "value": "CWE-22"
-              }
-            ]
-          }
-        ],
-        "affected": [
-          {
-            "source": "cna@vuldb.com",
-            "affectedData": [
-              {
-                "vendor": "DataLinkDC",
-                "product": "Dinky",
-                "cpes": [
-                  "cpe:2.3:a:datalinkdc:dinky:*:*:*:*:*:*:*:*"
-                ],
-                "modules": [
-                  "Catalogue Upload"
-                ],
-                "versions": [
-                  {
-                    "version": "1.2.0",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.2.1",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.2.2",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.2.3",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.2.4",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.2.5",
-                    "status": "affected"
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        "cveTags": [],
-        "vcConfigurations": [
-          {
-            "nodes": [
-              {
-                "operator": "OR",
-                "cpeMatch": [
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:datalinkdc:dinky:1.2.0:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:datalinkdc:dinky:1.2.1:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:datalinkdc:dinky:1.2.2:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:datalinkdc:dinky:1.2.3:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:datalinkdc:dinky:1.2.4:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:datalinkdc:dinky:1.2.5:*:*:*:*:*:*:*"
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        "metrics": {
-          "cvssMetricV40": [
-            {
-              "source": "cna@vuldb.com",
-              "type": "Secondary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:N/VI:L/VA:L/SC:N/SI:N/SA:N/E:P/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
-                "baseScore": 2.1,
-                "baseSeverity": "LOW",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "LOW",
-                "userInteraction": "NONE",
-                "vulnConfidentialityImpact": "NONE",
-                "vulnIntegrityImpact": "LOW",
-                "vulnAvailabilityImpact": "LOW",
-                "subConfidentialityImpact": "NONE",
-                "subIntegrityImpact": "NONE",
-                "subAvailabilityImpact": "NONE",
-                "exploitMaturity": "PROOF_OF_CONCEPT",
-                "confidentialityRequirement": "NOT_DEFINED",
-                "integrityRequirement": "NOT_DEFINED",
-                "availabilityRequirement": "NOT_DEFINED",
-                "modifiedAttackVector": "NOT_DEFINED",
-                "modifiedAttackComplexity": "NOT_DEFINED",
-                "modifiedAttackRequirements": "NOT_DEFINED",
-                "modifiedPrivilegesRequired": "NOT_DEFINED",
-                "modifiedUserInteraction": "NOT_DEFINED",
-                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
-                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
-                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
-                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
-                "modifiedSubIntegrityImpact": "NOT_DEFINED",
-                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            }
-          ],
-          "ssvcV203": [
-            {
-              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
-              "ssvcData": {
-                "options": [
-                  {
-                    "exploitation": "none"
-                  },
-                  {
-                    "automatable": "no"
-                  },
-                  {
-                    "technicalImpact": "partial"
-                  }
-                ],
-                "role": "CISA Coordinator",
-                "version": "2.0.3",
-                "id": "CVE-2026-124326",
-                "timestamp": "2026-11-13T03:13:53.380432Z"
-              }
-            }
-          ],
-          "cvssMetricV2": [
-            {
-              "source": "cna@vuldb.com",
-              "type": "Secondary",
-              "baseSeverity": "MEDIUM",
-              "exploitabilityScore": 8,
-              "impactScore": 4.9,
-              "acInsufInfo": false,
-              "obtainAllPrivilege": false,
-              "obtainUserPrivilege": false,
-              "obtainOtherPrivilege": false,
-              "userInteractionRequired": false,
-              "cvssData": {
-                "version": "2.0",
-                "vectorString": "AV:N/AC:L/Au:S/C:N/I:P/A:P",
-                "accessVector": "NETWORK",
-                "accessComplexity": "LOW",
-                "authentication": "SINGLE",
-                "confidentialityImpact": "NONE",
-                "integrityImpact": "PARTIAL",
-                "availabilityImpact": "PARTIAL",
-                "baseScore": 5.5
-              }
-            }
-          ],
-          "cvssMetricV31": [
-            {
-              "source": "cna@vuldb.com",
-              "type": "Secondary",
-              "exploitabilityScore": 2.8,
-              "impactScore": 2.5,
-              "cvssData": {
-                "version": "3.1",
-                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:L",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "privilegesRequired": "LOW",
-                "userInteraction": "NONE",
-                "scope": "UNCHANGED",
-                "confidentialityImpact": "NONE",
-                "integrityImpact": "LOW",
-                "availabilityImpact": "LOW",
-                "baseScore": 5.4,
-                "baseSeverity": "MEDIUM"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "cve": {
-        "id": "CVE-2026-124328",
-        "sourceIdentifier": "cna@vuldb.com",
-        "vulnStatus": "Deferred",
-        "published": "2026-11-08T11:16:34.420",
-        "lastModified": "2026-11-12T19:16:52.057",
-        "descriptions": [
-          {
-            "lang": "en",
-            "value": "A vulnerability has been found in FlowCI flow-core-x up to 1.23.49. The affected element is the function ConditionManagerImpl.run of the file core/src/main/java/com/flowci/core/common/manager/ConditionManagerImpl.java of the component Groovy Script Evaluation. The manipulation of the argument condition leads to code injection. The attack is possible to be carried out remotely. The exploit has been disclosed to the public and may be used. The vendor was contacted early about this disclosure but did not respond in any way."
-          }
-        ],
-        "references": [
-          {
-            "url": "https://glacier-tarsal-711.notion.site/Flow-ci-Unrestricted-GroovyShell-Remote-Code-Execution-in-flow-ci-CI-Condition-Evaluation-3f7b25e24b368091a9c8d7bbf28fa5bd",
-            "source": "cna@vuldb.com",
-            "tags": [
-              "Exploit"
-            ]
-          },
-          {
-            "url": "https://vuldb.com/cve/CVE-2026-124328",
-            "source": "cna@vuldb.com"
-          },
-          {
-            "url": "https://vuldb.com/submit/1027401",
-            "source": "cna@vuldb.com"
-          },
-          {
-            "url": "https://vuldb.com/vuln/432648",
-            "source": "cna@vuldb.com"
-          },
-          {
-            "url": "https://vuldb.com/vuln/432648/cti",
-            "source": "cna@vuldb.com"
-          }
-        ],
-        "weaknesses": [
-          {
-            "source": "cna@vuldb.com",
-            "type": "Secondary",
-            "description": [
-              {
-                "lang": "en",
-                "value": "CWE-74"
-              },
-              {
-                "lang": "en",
-                "value": "CWE-94"
-              }
-            ]
-          }
-        ],
-        "affected": [
-          {
-            "source": "cna@vuldb.com",
-            "affectedData": [
-              {
-                "vendor": "FlowCI",
-                "product": "flow-core-x",
-                "cpes": [
-                  "cpe:2.3:a:flowci:flow-core-x:*:*:*:*:*:*:*:*"
-                ],
-                "modules": [
-                  "Groovy Script Evaluation"
-                ],
-                "versions": [
-                  {
-                    "version": "1.23.0",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.1",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.2",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.3",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.4",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.5",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.6",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.7",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.8",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.9",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.10",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.11",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.12",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.13",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.14",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.15",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.16",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.17",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.18",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.19",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.20",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.21",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.22",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.23",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.24",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.25",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.26",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.27",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.28",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.29",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.30",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.31",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.32",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.33",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.34",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.35",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.36",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.37",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.38",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.39",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.40",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.41",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.42",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.43",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.44",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.45",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.46",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.47",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.48",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.49",
-                    "status": "affected"
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        "cveTags": [],
-        "vcConfigurations": [
-          {
-            "nodes": [
-              {
-                "operator": "OR",
-                "cpeMatch": [
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.0:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.10:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.11:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.12:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.13:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.14:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.15:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.16:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.17:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.18:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.19:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.1:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.20:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.21:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.22:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.23:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.24:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.25:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.26:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.27:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.28:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.29:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.2:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.30:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.31:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.32:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.33:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.34:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.35:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.36:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.37:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.38:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.39:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.3:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.40:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.41:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.42:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.43:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.44:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.45:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.46:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.47:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.48:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.49:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.4:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.5:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.6:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.7:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.8:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.9:*:*:*:*:*:*:*"
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        "metrics": {
-          "cvssMetricV40": [
-            {
-              "source": "cna@vuldb.com",
-              "type": "Secondary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:L/VI:L/VA:L/SC:L/SI:L/SA:L/E:P/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
-                "baseScore": 2.1,
-                "baseSeverity": "LOW",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "LOW",
-                "userInteraction": "NONE",
-                "vulnConfidentialityImpact": "LOW",
-                "vulnIntegrityImpact": "LOW",
-                "vulnAvailabilityImpact": "LOW",
-                "subConfidentialityImpact": "LOW",
-                "subIntegrityImpact": "LOW",
-                "subAvailabilityImpact": "LOW",
-                "exploitMaturity": "PROOF_OF_CONCEPT",
-                "confidentialityRequirement": "NOT_DEFINED",
-                "integrityRequirement": "NOT_DEFINED",
-                "availabilityRequirement": "NOT_DEFINED",
-                "modifiedAttackVector": "NOT_DEFINED",
-                "modifiedAttackComplexity": "NOT_DEFINED",
-                "modifiedAttackRequirements": "NOT_DEFINED",
-                "modifiedPrivilegesRequired": "NOT_DEFINED",
-                "modifiedUserInteraction": "NOT_DEFINED",
-                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
-                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
-                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
-                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
-                "modifiedSubIntegrityImpact": "NOT_DEFINED",
-                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            }
-          ],
-          "ssvcV203": [
-            {
-              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
-              "ssvcData": {
-                "options": [
-                  {
-                    "exploitation": "poc"
-                  },
-                  {
-                    "automatable": "no"
-                  },
-                  {
-                    "technicalImpact": "partial"
-                  }
-                ],
-                "role": "CISA Coordinator",
-                "version": "2.0.3",
-                "id": "CVE-2026-124328",
-                "timestamp": "2026-11-12T18:04:12.239715Z"
-              }
-            }
-          ],
-          "cvssMetricV2": [
-            {
-              "source": "cna@vuldb.com",
-              "type": "Secondary",
-              "baseSeverity": "MEDIUM",
-              "exploitabilityScore": 8,
-              "impactScore": 6.4,
-              "acInsufInfo": false,
-              "obtainAllPrivilege": false,
-              "obtainUserPrivilege": false,
-              "obtainOtherPrivilege": false,
-              "userInteractionRequired": false,
-              "cvssData": {
-                "version": "2.0",
-                "vectorString": "AV:N/AC:L/Au:S/C:P/I:P/A:P",
-                "accessVector": "NETWORK",
-                "accessComplexity": "LOW",
-                "authentication": "SINGLE",
-                "confidentialityImpact": "PARTIAL",
-                "integrityImpact": "PARTIAL",
-                "availabilityImpact": "PARTIAL",
-                "baseScore": 6.5
-              }
-            }
-          ],
-          "cvssMetricV31": [
-            {
-              "source": "cna@vuldb.com",
-              "type": "Secondary",
-              "exploitabilityScore": 3.1,
-              "impactScore": 3.7,
-              "cvssData": {
-                "version": "3.1",
-                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:L/I:L/A:L",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "privilegesRequired": "LOW",
-                "userInteraction": "NONE",
-                "scope": "CHANGED",
-                "confidentialityImpact": "LOW",
-                "integrityImpact": "LOW",
-                "availabilityImpact": "LOW",
-                "baseScore": 7.4,
-                "baseSeverity": "HIGH"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "cve": {
-        "id": "CVE-2026-124329",
-        "sourceIdentifier": "cna@vuldb.com",
-        "vulnStatus": "Deferred",
-        "published": "2026-11-08T12:17:48.440",
-        "lastModified": "2026-11-10T18:17:28.237",
-        "descriptions": [
-          {
-            "lang": "en",
-            "value": "A vulnerability was found in FlowCI flow-core-x up to 1.23.49. The impacted element is the function FileHelper.unzip of the file common/src/main/java/com/flowci/common/helper/FileHelper.java. The manipulation results in path traversal. The attack may be performed from remote. A high complexity level is associated with this attack. The exploitability is regarded as difficult. The exploit has been made public and could be used. The vendor was contacted early about this disclosure but did not respond in any way."
-          }
-        ],
-        "references": [
-          {
-            "url": "https://glacier-tarsal-711.notion.site/Flow-ci-ZipSlip-Path-Traversal-in-flow-ci-FileHelper-unzip-During-Job-Report-Extraction-3f7b25e24b3680a8b7cec8c15d79a2fb",
-            "source": "cna@vuldb.com",
-            "tags": [
-              "Exploit"
-            ]
-          },
-          {
-            "url": "https://vuldb.com/cve/CVE-2026-124329",
-            "source": "cna@vuldb.com"
-          },
-          {
-            "url": "https://vuldb.com/submit/1027414",
-            "source": "cna@vuldb.com"
-          },
-          {
-            "url": "https://vuldb.com/vuln/432649",
-            "source": "cna@vuldb.com"
-          },
-          {
-            "url": "https://vuldb.com/vuln/432649/cti",
-            "source": "cna@vuldb.com"
-          }
-        ],
-        "weaknesses": [
-          {
-            "source": "cna@vuldb.com",
-            "type": "Secondary",
-            "description": [
-              {
-                "lang": "en",
-                "value": "CWE-22"
-              }
-            ]
-          }
-        ],
-        "affected": [
-          {
-            "source": "cna@vuldb.com",
-            "affectedData": [
-              {
-                "vendor": "FlowCI",
-                "product": "flow-core-x",
-                "cpes": [
-                  "cpe:2.3:a:flowci:flow-core-x:*:*:*:*:*:*:*:*"
-                ],
-                "versions": [
-                  {
-                    "version": "1.23.0",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.1",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.2",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.3",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.4",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.5",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.6",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.7",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.8",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.9",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.10",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.11",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.12",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.13",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.14",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.15",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.16",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.17",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.18",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.19",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.20",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.21",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.22",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.23",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.24",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.25",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.26",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.27",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.28",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.29",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.30",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.31",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.32",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.33",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.34",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.35",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.36",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.37",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.38",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.39",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.40",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.41",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.42",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.43",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.44",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.45",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.46",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.47",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.48",
-                    "status": "affected"
-                  },
-                  {
-                    "version": "1.23.49",
-                    "status": "affected"
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        "cveTags": [],
-        "vcConfigurations": [
-          {
-            "nodes": [
-              {
-                "operator": "OR",
-                "cpeMatch": [
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.0:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.10:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.11:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.12:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.13:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.14:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.15:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.16:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.17:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.18:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.19:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.1:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.20:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.21:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.22:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.23:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.24:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.25:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.26:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.27:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.28:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.29:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.2:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.30:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.31:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.32:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.33:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.34:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.35:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.36:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.37:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.38:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.39:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.3:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.40:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.41:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.42:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.43:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.44:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.45:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.46:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.47:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.48:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.49:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.4:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.5:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.6:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.7:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.8:*:*:*:*:*:*:*"
-                  },
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:flowci:flow-core-x:1.23.9:*:*:*:*:*:*:*"
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        "metrics": {
-          "cvssMetricV40": [
-            {
-              "source": "cna@vuldb.com",
-              "type": "Secondary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:H/AT:N/PR:L/UI:N/VC:L/VI:L/VA:L/SC:N/SI:N/SA:N/E:P/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
-                "baseScore": 1.3,
-                "baseSeverity": "LOW",
-                "attackVector": "NETWORK",
-                "attackComplexity": "HIGH",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "LOW",
-                "userInteraction": "NONE",
-                "vulnConfidentialityImpact": "LOW",
-                "vulnIntegrityImpact": "LOW",
-                "vulnAvailabilityImpact": "LOW",
-                "subConfidentialityImpact": "NONE",
-                "subIntegrityImpact": "NONE",
-                "subAvailabilityImpact": "NONE",
-                "exploitMaturity": "PROOF_OF_CONCEPT",
-                "confidentialityRequirement": "NOT_DEFINED",
-                "integrityRequirement": "NOT_DEFINED",
-                "availabilityRequirement": "NOT_DEFINED",
-                "modifiedAttackVector": "NOT_DEFINED",
-                "modifiedAttackComplexity": "NOT_DEFINED",
-                "modifiedAttackRequirements": "NOT_DEFINED",
-                "modifiedPrivilegesRequired": "NOT_DEFINED",
-                "modifiedUserInteraction": "NOT_DEFINED",
-                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
-                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
-                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
-                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
-                "modifiedSubIntegrityImpact": "NOT_DEFINED",
-                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            }
-          ],
-          "ssvcV203": [
-            {
-              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
-              "ssvcData": {
-                "options": [
-                  {
-                    "exploitation": "poc"
-                  },
-                  {
-                    "automatable": "no"
-                  },
-                  {
-                    "technicalImpact": "partial"
-                  }
-                ],
-                "role": "CISA Coordinator",
-                "version": "2.0.3",
-                "id": "CVE-2026-124329",
-                "timestamp": "2026-11-10T16:40:16.994660Z"
-              }
-            }
-          ],
-          "cvssMetricV2": [
-            {
-              "source": "cna@vuldb.com",
-              "type": "Secondary",
-              "baseSeverity": "MEDIUM",
-              "exploitabilityScore": 3.9,
-              "impactScore": 6.4,
-              "acInsufInfo": false,
-              "obtainAllPrivilege": false,
-              "obtainUserPrivilege": false,
-              "obtainOtherPrivilege": false,
-              "userInteractionRequired": false,
-              "cvssData": {
-                "version": "2.0",
-                "vectorString": "AV:N/AC:H/Au:S/C:P/I:P/A:P",
-                "accessVector": "NETWORK",
-                "accessComplexity": "HIGH",
-                "authentication": "SINGLE",
-                "confidentialityImpact": "PARTIAL",
-                "integrityImpact": "PARTIAL",
-                "availabilityImpact": "PARTIAL",
-                "baseScore": 4.6
-              }
-            }
-          ],
-          "cvssMetricV31": [
-            {
-              "source": "cna@vuldb.com",
-              "type": "Secondary",
-              "exploitabilityScore": 1.6,
-              "impactScore": 3.4,
-              "cvssData": {
-                "version": "3.1",
-                "vectorString": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:L",
-                "attackVector": "NETWORK",
-                "attackComplexity": "HIGH",
-                "privilegesRequired": "LOW",
-                "userInteraction": "NONE",
-                "scope": "UNCHANGED",
-                "confidentialityImpact": "LOW",
-                "integrityImpact": "LOW",
-                "availabilityImpact": "LOW",
-                "baseScore": 5,
-                "baseSeverity": "MEDIUM"
-              }
-            }
-          ]
-        }
-      }
-    },
     {
       "cve": {
         "id": "CVE-2026-124330",
@@ -11200,6 +9756,603 @@
                 "availabilityImpact": "HIGH",
                 "baseScore": 9.9,
                 "baseSeverity": "CRITICAL"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-124470",
+        "sourceIdentifier": "disclosure@vulncheck.com",
+        "vulnStatus": "Awaiting Analysis",
+        "published": "2026-11-08T14:18:15.287",
+        "lastModified": "2026-11-10T21:46:29.983",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "OpenEMR before 8.3.0 contains a broken object level authorization vulnerability in portal/report/portal_custom_report.php that allows authenticated portal patients to read other patients' problem list entries. Attackers can enumerate sequential IDs in issue_ parameter names to retrieve other patients' problem titles, clinical notes, ICD diagnosis codes, and IPPF contraceptive records."
+          }
+        ],
+        "references": [
+          {
+            "url": "https://github.com/openemr/openemr/security/advisories/GHSA-xcrj-xc98-x8g6",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://www.vulncheck.com/advisories/openemr-before-8.3.0-bola-via-portal-custom-report-php-exposes-patient-problem-lists",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/openemr/openemr/security/advisories/GHSA-xcrj-xc98-x8g6",
+            "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0"
+          }
+        ],
+        "weaknesses": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-639"
+              }
+            ]
+          }
+        ],
+        "affected": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "affectedData": [
+              {
+                "vendor": "openemr",
+                "product": "openemr",
+                "defaultStatus": "unaffected",
+                "versions": [
+                  {
+                    "version": "0",
+                    "status": "affected",
+                    "versionType": "semver",
+                    "lessThan": "8.3.0"
+                  },
+                  {
+                    "version": "8.3.0",
+                    "status": "unaffected",
+                    "versionType": "semver"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cveTags": [],
+        "vcConfigurations": [
+          {
+            "nodes": [
+              {
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:open-emr:openemr:*:*:*:*:*:*:*:*",
+                    "versionEndExcluding": "8.3.0"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "metrics": {
+          "cvssMetricV40": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N",
+                "baseScore": 7.1,
+                "baseSeverity": "HIGH",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "NONE",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            },
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Secondary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+                "baseScore": 7.1,
+                "baseSeverity": "HIGH",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "NONE",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "exploitMaturity": "NOT_DEFINED",
+                "confidentialityRequirement": "NOT_DEFINED",
+                "integrityRequirement": "NOT_DEFINED",
+                "availabilityRequirement": "NOT_DEFINED",
+                "modifiedAttackVector": "NOT_DEFINED",
+                "modifiedAttackComplexity": "NOT_DEFINED",
+                "modifiedAttackRequirements": "NOT_DEFINED",
+                "modifiedPrivilegesRequired": "NOT_DEFINED",
+                "modifiedUserInteraction": "NOT_DEFINED",
+                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            }
+          ],
+          "ssvcV203": [
+            {
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+              "ssvcData": {
+                "options": [
+                  {
+                    "exploitation": "poc"
+                  },
+                  {
+                    "automatable": "no"
+                  },
+                  {
+                    "technicalImpact": "partial"
+                  }
+                ],
+                "role": "CISA Coordinator",
+                "version": "2.0.3",
+                "id": "CVE-2026-124470",
+                "timestamp": "2026-11-09T14:21:50.200176Z"
+              }
+            }
+          ],
+          "cvssMetricV31": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "exploitabilityScore": 2.8,
+              "impactScore": 3.6,
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "scope": "UNCHANGED",
+                "confidentialityImpact": "HIGH",
+                "integrityImpact": "NONE",
+                "availabilityImpact": "NONE",
+                "baseScore": 6.5,
+                "baseSeverity": "MEDIUM"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-124471",
+        "sourceIdentifier": "disclosure@vulncheck.com",
+        "vulnStatus": "Undergoing Analysis",
+        "published": "2026-11-08T14:18:15.447",
+        "lastModified": "2026-11-13T04:17:41.030",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "OpenEMR before 8.3.0 contains a missing authorization vulnerability in interface/billing/sl_eob_invoice.php that allows any authenticated user to read and modify billing data for any encounter. Attackers can iterate the id parameter to read patient names and billing notes, and post payments, adjustments, deletions, or billing notes against any patient's account."
+          }
+        ],
+        "references": [
+          {
+            "url": "https://github.com/openemr/openemr/security/advisories/GHSA-55gc-5wj7-xxp7",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://www.vulncheck.com/advisories/openemr-before-8.3.0-missing-authorization-and-idor-via-sl-eob-invoice-php",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/openemr/openemr/security/advisories/GHSA-55gc-5wj7-xxp7",
+            "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0"
+          }
+        ],
+        "weaknesses": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-639"
+              }
+            ]
+          }
+        ],
+        "affected": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "affectedData": [
+              {
+                "vendor": "openemr",
+                "product": "openemr",
+                "defaultStatus": "unaffected",
+                "versions": [
+                  {
+                    "version": "0",
+                    "status": "affected",
+                    "versionType": "semver",
+                    "lessThan": "8.3.0"
+                  },
+                  {
+                    "version": "8.3.0",
+                    "status": "unaffected",
+                    "versionType": "semver"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cveTags": [],
+        "vcConfigurations": [
+          {
+            "nodes": [
+              {
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:open-emr:openemr:*:*:*:*:*:*:*:*",
+                    "versionEndExcluding": "8.3.0"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "metrics": {
+          "cvssMetricV40": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N",
+                "baseScore": 8.6,
+                "baseSeverity": "HIGH",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "HIGH",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            },
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Secondary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+                "baseScore": 8.6,
+                "baseSeverity": "HIGH",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "HIGH",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "exploitMaturity": "NOT_DEFINED",
+                "confidentialityRequirement": "NOT_DEFINED",
+                "integrityRequirement": "NOT_DEFINED",
+                "availabilityRequirement": "NOT_DEFINED",
+                "modifiedAttackVector": "NOT_DEFINED",
+                "modifiedAttackComplexity": "NOT_DEFINED",
+                "modifiedAttackRequirements": "NOT_DEFINED",
+                "modifiedPrivilegesRequired": "NOT_DEFINED",
+                "modifiedUserInteraction": "NOT_DEFINED",
+                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            }
+          ],
+          "ssvcV203": [
+            {
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+              "ssvcData": {
+                "options": [
+                  {
+                    "exploitation": "poc"
+                  },
+                  {
+                    "automatable": "no"
+                  },
+                  {
+                    "technicalImpact": "total"
+                  }
+                ],
+                "role": "CISA Coordinator",
+                "version": "2.0.3",
+                "id": "CVE-2026-124471",
+                "timestamp": "2026-11-13T03:25:49.696223Z"
+              }
+            }
+          ],
+          "cvssMetricV31": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "exploitabilityScore": 2.8,
+              "impactScore": 5.2,
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "scope": "UNCHANGED",
+                "confidentialityImpact": "HIGH",
+                "integrityImpact": "HIGH",
+                "availabilityImpact": "NONE",
+                "baseScore": 8.1,
+                "baseSeverity": "HIGH"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-124472",
+        "sourceIdentifier": "disclosure@vulncheck.com",
+        "vulnStatus": "Awaiting Analysis",
+        "published": "2026-11-08T14:18:15.610",
+        "lastModified": "2026-11-12T14:17:27.493",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "OpenEMR before 8.3.0 contains a missing authorization vulnerability in interface/billing/sl_eob_patient_note.php that allows any authenticated user to read and modify patient billing notes. Attackers with low-privilege accounts can enumerate the patient_id parameter and submit POST requests using the embedded CSRF token to view or tamper with confidential billing data."
+          }
+        ],
+        "references": [
+          {
+            "url": "https://github.com/openemr/openemr/security/advisories/GHSA-74j7-7q95-rvxg",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://www.vulncheck.com/advisories/openemr-before-8.3.0-missing-authorization-via-sl-eob-patient-note-php",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/openemr/openemr/security/advisories/GHSA-74j7-7q95-rvxg",
+            "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0"
+          }
+        ],
+        "weaknesses": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-862"
+              }
+            ]
+          }
+        ],
+        "affected": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "affectedData": [
+              {
+                "vendor": "openemr",
+                "product": "openemr",
+                "defaultStatus": "unaffected",
+                "versions": [
+                  {
+                    "version": "0",
+                    "status": "affected",
+                    "versionType": "semver",
+                    "lessThan": "8.3.0"
+                  },
+                  {
+                    "version": "8.3.0",
+                    "status": "unaffected",
+                    "versionType": "semver"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cveTags": [],
+        "vcConfigurations": [
+          {
+            "nodes": [
+              {
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:open-emr:openemr:*:*:*:*:*:*:*:*",
+                    "versionEndExcluding": "8.3.0"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "metrics": {
+          "cvssMetricV40": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N",
+                "baseScore": 8.6,
+                "baseSeverity": "HIGH",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "HIGH",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            },
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Secondary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+                "baseScore": 8.6,
+                "baseSeverity": "HIGH",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "HIGH",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "exploitMaturity": "NOT_DEFINED",
+                "confidentialityRequirement": "NOT_DEFINED",
+                "integrityRequirement": "NOT_DEFINED",
+                "availabilityRequirement": "NOT_DEFINED",
+                "modifiedAttackVector": "NOT_DEFINED",
+                "modifiedAttackComplexity": "NOT_DEFINED",
+                "modifiedAttackRequirements": "NOT_DEFINED",
+                "modifiedPrivilegesRequired": "NOT_DEFINED",
+                "modifiedUserInteraction": "NOT_DEFINED",
+                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            }
+          ],
+          "ssvcV203": [
+            {
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+              "ssvcData": {
+                "options": [
+                  {
+                    "exploitation": "poc"
+                  },
+                  {
+                    "automatable": "no"
+                  },
+                  {
+                    "technicalImpact": "total"
+                  }
+                ],
+                "role": "CISA Coordinator",
+                "version": "2.0.3",
+                "id": "CVE-2026-124472",
+                "timestamp": "2026-11-12T13:49:13.981966Z"
+              }
+            }
+          ],
+          "cvssMetricV31": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "exploitabilityScore": 2.8,
+              "impactScore": 5.2,
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "scope": "UNCHANGED",
+                "confidentialityImpact": "HIGH",
+                "integrityImpact": "HIGH",
+                "availabilityImpact": "NONE",
+                "baseScore": 8.1,
+                "baseSeverity": "HIGH"
               }
             }
           ]
