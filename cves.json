@@ -1,2141 +1,7 @@
 {
-  "timestamp": 1795388691701,
-  "lastUpdated": "08:04:51",
+  "timestamp": 1795410548153,
+  "lastUpdated": "14:09:07",
   "vulnerabilities": [
-    {
-      "cve": {
-        "id": "CVE-2026-129491",
-        "sourceIdentifier": "disclosure@vulncheck.com",
-        "vulnStatus": "Received",
-        "published": "2026-11-16T01:17:18.857",
-        "lastModified": "2026-11-16T19:17:43.283",
-        "descriptions": [
-          {
-            "lang": "en",
-            "value": "Qbian61 forum-java commit 20f7e68 through commit 63152c4 contains a stored cross-site scripting vulnerability that allows authenticated users to inject script by posting unsanitized comment content rendered via jQuery .html() in the reply dialog. Attackers can post comments with img onerror payloads that execute when victims click Reply, stealing the non-HttpOnly sid session cookie to hijack accounts including administrators."
-          }
-        ],
-        "references": [
-          {
-            "url": "https://github.com/Qbian61/forum-java/blob/63152c49c71ad8121bda6e9a03a7ba7dc39ae52c/forum-portal/src/main/resources/templates/include/comment-list.html#L56-L60",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://github.com/Qbian61/forum-java/blob/63152c49c71ad8121bda6e9a03a7ba7dc39ae52c/forum-portal/src/main/resources/templates/include/posts-script.html#L30-L34",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://github.com/Qbian61/forum-java/issues/25",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://vul.yulun.ac.cn/20261115/forum-java/",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://www.vulncheck.com/advisories/qbian61-forum-java-commit-20f7e68-through-63152c4-stored-xss-via-comment-reply-dialog",
-            "source": "disclosure@vulncheck.com"
-          }
-        ],
-        "weaknesses": [
-          {
-            "source": "disclosure@vulncheck.com",
-            "type": "Primary",
-            "description": [
-              {
-                "lang": "en",
-                "value": "CWE-79"
-              }
-            ]
-          }
-        ],
-        "affected": [
-          {
-            "source": "disclosure@vulncheck.com",
-            "affectedData": [
-              {
-                "vendor": "Qbian61",
-                "product": "forum-java",
-                "repo": "https://github.com/Qbian61/forum-java",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "20f7e68ff5d465fe6de91adab4f94df36fc22f63",
-                    "status": "affected",
-                    "versionType": "git",
-                    "lessThanOrEqual": "63152c49c71ad8121bda6e9a03a7ba7dc39ae52c"
-                  }
-                ],
-                "packageURL": "pkg:github/Qbian61/forum-java"
-              }
-            ]
-          }
-        ],
-        "cveTags": [],
-        "metrics": {
-          "cvssMetricV40": [
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Primary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:P/VC:L/VI:L/VA:N/SC:L/SI:L/SA:N",
-                "baseScore": 5.1,
-                "baseSeverity": "MEDIUM",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "LOW",
-                "userInteraction": "PASSIVE",
-                "vulnConfidentialityImpact": "LOW",
-                "vulnIntegrityImpact": "LOW",
-                "vulnAvailabilityImpact": "NONE",
-                "subConfidentialityImpact": "LOW",
-                "subIntegrityImpact": "LOW",
-                "subAvailabilityImpact": "NONE",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            },
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Secondary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:P/VC:L/VI:L/VA:N/SC:L/SI:L/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
-                "baseScore": 5.1,
-                "baseSeverity": "MEDIUM",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "LOW",
-                "userInteraction": "PASSIVE",
-                "vulnConfidentialityImpact": "LOW",
-                "vulnIntegrityImpact": "LOW",
-                "vulnAvailabilityImpact": "NONE",
-                "subConfidentialityImpact": "LOW",
-                "subIntegrityImpact": "LOW",
-                "subAvailabilityImpact": "NONE",
-                "exploitMaturity": "NOT_DEFINED",
-                "confidentialityRequirement": "NOT_DEFINED",
-                "integrityRequirement": "NOT_DEFINED",
-                "availabilityRequirement": "NOT_DEFINED",
-                "modifiedAttackVector": "NOT_DEFINED",
-                "modifiedAttackComplexity": "NOT_DEFINED",
-                "modifiedAttackRequirements": "NOT_DEFINED",
-                "modifiedPrivilegesRequired": "NOT_DEFINED",
-                "modifiedUserInteraction": "NOT_DEFINED",
-                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
-                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
-                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
-                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
-                "modifiedSubIntegrityImpact": "NOT_DEFINED",
-                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            }
-          ],
-          "ssvcV203": [
-            {
-              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
-              "ssvcData": {
-                "options": [
-                  {
-                    "exploitation": "none"
-                  },
-                  {
-                    "automatable": "no"
-                  },
-                  {
-                    "technicalImpact": "partial"
-                  }
-                ],
-                "role": "CISA Coordinator",
-                "version": "2.0.3",
-                "id": "CVE-2026-129491",
-                "timestamp": "2026-11-16T18:20:48.866064Z"
-              }
-            }
-          ],
-          "cvssMetricV31": [
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Primary",
-              "exploitabilityScore": 2.3,
-              "impactScore": 2.7,
-              "cvssData": {
-                "version": "3.1",
-                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:L/A:N",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "privilegesRequired": "LOW",
-                "userInteraction": "REQUIRED",
-                "scope": "CHANGED",
-                "confidentialityImpact": "LOW",
-                "integrityImpact": "LOW",
-                "availabilityImpact": "NONE",
-                "baseScore": 5.4,
-                "baseSeverity": "MEDIUM"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "cve": {
-        "id": "CVE-2026-129492",
-        "sourceIdentifier": "disclosure@vulncheck.com",
-        "vulnStatus": "Received",
-        "published": "2026-11-16T01:17:19.737",
-        "lastModified": "2026-11-16T17:17:31.933",
-        "descriptions": [
-          {
-            "lang": "en",
-            "value": "Bolo (bolo-solo) 1.7 through 2.6.4 contains a stored cross-site scripting vulnerability that allows unauthenticated attackers to inject scripts via the unsanitized commentOriginalCommentName parameter. Attackers can post a comment to /article/comments with a short payload that steals non-HttpOnly session cookies from visitors, enabling takeover of administrator accounts."
-          }
-        ],
-        "references": [
-          {
-            "url": "https://github.com/bolo-blog/bolo-solo/blob/e0ab6b1f57a4ba66b4a42a7b6ceafb87c33290cc/src/main/java/org/b3log/solo/service/CommentMgmtService.java#L299-L306",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://github.com/bolo-blog/bolo-solo/blob/e0ab6b1f57a4ba66b4a42a7b6ceafb87c33290cc/src/main/webapp/skins/bolo-nexmoe/common-comment.ftl#L29-L34",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://github.com/bolo-blog/bolo-solo/issues/331",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://vul.yulun.ac.cn/20261115/bolo-solo/",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://www.vulncheck.com/advisories/bolo-bolo-solo-1.7-through-2.6.4-stored-xss-via-comment-reply-to-name",
-            "source": "disclosure@vulncheck.com"
-          }
-        ],
-        "weaknesses": [
-          {
-            "source": "disclosure@vulncheck.com",
-            "type": "Primary",
-            "description": [
-              {
-                "lang": "en",
-                "value": "CWE-79"
-              }
-            ]
-          }
-        ],
-        "affected": [
-          {
-            "source": "disclosure@vulncheck.com",
-            "affectedData": [
-              {
-                "vendor": "bolo-blog",
-                "product": "bolo-solo",
-                "repo": "https://github.com/bolo-blog/bolo-solo",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "1.7",
-                    "status": "affected",
-                    "versionType": "custom",
-                    "lessThanOrEqual": "2.6.4"
-                  }
-                ],
-                "packageURL": "pkg:github/bolo-blog/bolo-solo"
-              }
-            ]
-          }
-        ],
-        "cveTags": [],
-        "vcConfigurations": [
-          {
-            "nodes": [
-              {
-                "cpeMatch": [
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:adlered:bolo-solo:*:*:*:*:*:*:*:*",
-                    "versionStartIncluding": "1.7",
-                    "versionEndIncluding": "2.6.4"
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        "metrics": {
-          "cvssMetricV40": [
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Primary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:L/VI:L/VA:N/SC:L/SI:L/SA:N",
-                "baseScore": 5.3,
-                "baseSeverity": "MEDIUM",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "NONE",
-                "userInteraction": "PASSIVE",
-                "vulnConfidentialityImpact": "LOW",
-                "vulnIntegrityImpact": "LOW",
-                "vulnAvailabilityImpact": "NONE",
-                "subConfidentialityImpact": "LOW",
-                "subIntegrityImpact": "LOW",
-                "subAvailabilityImpact": "NONE",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            },
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Secondary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:L/VI:L/VA:N/SC:L/SI:L/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
-                "baseScore": 5.3,
-                "baseSeverity": "MEDIUM",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "NONE",
-                "userInteraction": "PASSIVE",
-                "vulnConfidentialityImpact": "LOW",
-                "vulnIntegrityImpact": "LOW",
-                "vulnAvailabilityImpact": "NONE",
-                "subConfidentialityImpact": "LOW",
-                "subIntegrityImpact": "LOW",
-                "subAvailabilityImpact": "NONE",
-                "exploitMaturity": "NOT_DEFINED",
-                "confidentialityRequirement": "NOT_DEFINED",
-                "integrityRequirement": "NOT_DEFINED",
-                "availabilityRequirement": "NOT_DEFINED",
-                "modifiedAttackVector": "NOT_DEFINED",
-                "modifiedAttackComplexity": "NOT_DEFINED",
-                "modifiedAttackRequirements": "NOT_DEFINED",
-                "modifiedPrivilegesRequired": "NOT_DEFINED",
-                "modifiedUserInteraction": "NOT_DEFINED",
-                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
-                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
-                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
-                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
-                "modifiedSubIntegrityImpact": "NOT_DEFINED",
-                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            }
-          ],
-          "ssvcV203": [
-            {
-              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
-              "ssvcData": {
-                "options": [
-                  {
-                    "exploitation": "none"
-                  },
-                  {
-                    "automatable": "no"
-                  },
-                  {
-                    "technicalImpact": "partial"
-                  }
-                ],
-                "role": "CISA Coordinator",
-                "version": "2.0.3",
-                "id": "CVE-2026-129492",
-                "timestamp": "2026-11-16T16:02:10.420916Z"
-              }
-            }
-          ],
-          "cvssMetricV31": [
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Primary",
-              "exploitabilityScore": 2.8,
-              "impactScore": 2.7,
-              "cvssData": {
-                "version": "3.1",
-                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "privilegesRequired": "NONE",
-                "userInteraction": "REQUIRED",
-                "scope": "CHANGED",
-                "confidentialityImpact": "LOW",
-                "integrityImpact": "LOW",
-                "availabilityImpact": "NONE",
-                "baseScore": 6.1,
-                "baseSeverity": "MEDIUM"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "cve": {
-        "id": "CVE-2026-129493",
-        "sourceIdentifier": "disclosure@vulncheck.com",
-        "vulnStatus": "Received",
-        "published": "2026-11-16T01:17:19.897",
-        "lastModified": "2026-11-16T20:19:01.770",
-        "descriptions": [
-          {
-            "lang": "en",
-            "value": "Bolo (bolo-solo) 1.7 through 2.6.4 contains an information disclosure vulnerability that allows unauthenticated attackers to read article view passwords via the public GET /articles endpoint. Attackers can retrieve the plaintext articleViewPwd field returned by ArticleProcessor.getArticlesByPage and submit it to read password-protected article content."
-          }
-        ],
-        "references": [
-          {
-            "url": "https://github.com/bolo-blog/bolo-solo/blob/e0ab6b1f57a4ba66b4a42a7b6ceafb87c33290cc/src/main/java/org/b3log/solo/processor/ArticleProcessor.java#L442-L478",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://github.com/bolo-blog/bolo-solo/issues/331",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://vul.yulun.ac.cn/20261115/bolo-solo/",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://www.vulncheck.com/advisories/bolo-bolo-solo-1.7-through-2.6.4-article-password-disclosure-via-articles",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://vul.yulun.ac.cn/20261115/bolo-solo/",
-            "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0"
-          }
-        ],
-        "weaknesses": [
-          {
-            "source": "disclosure@vulncheck.com",
-            "type": "Primary",
-            "description": [
-              {
-                "lang": "en",
-                "value": "CWE-201"
-              }
-            ]
-          }
-        ],
-        "affected": [
-          {
-            "source": "disclosure@vulncheck.com",
-            "affectedData": [
-              {
-                "vendor": "bolo-blog",
-                "product": "bolo-solo",
-                "repo": "https://github.com/bolo-blog/bolo-solo",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "1.7",
-                    "status": "affected",
-                    "versionType": "custom",
-                    "lessThanOrEqual": "2.6.4"
-                  }
-                ],
-                "packageURL": "pkg:github/bolo-blog/bolo-solo"
-              }
-            ]
-          }
-        ],
-        "cveTags": [],
-        "vcConfigurations": [
-          {
-            "nodes": [
-              {
-                "cpeMatch": [
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:adlered:bolo-solo:*:*:*:*:*:*:*:*",
-                    "versionStartIncluding": "1.7",
-                    "versionEndIncluding": "2.6.4"
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        "metrics": {
-          "cvssMetricV40": [
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Primary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N",
-                "baseScore": 8.7,
-                "baseSeverity": "HIGH",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "NONE",
-                "userInteraction": "NONE",
-                "vulnConfidentialityImpact": "HIGH",
-                "vulnIntegrityImpact": "NONE",
-                "vulnAvailabilityImpact": "NONE",
-                "subConfidentialityImpact": "NONE",
-                "subIntegrityImpact": "NONE",
-                "subAvailabilityImpact": "NONE",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            },
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Secondary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
-                "baseScore": 8.7,
-                "baseSeverity": "HIGH",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "NONE",
-                "userInteraction": "NONE",
-                "vulnConfidentialityImpact": "HIGH",
-                "vulnIntegrityImpact": "NONE",
-                "vulnAvailabilityImpact": "NONE",
-                "subConfidentialityImpact": "NONE",
-                "subIntegrityImpact": "NONE",
-                "subAvailabilityImpact": "NONE",
-                "exploitMaturity": "NOT_DEFINED",
-                "confidentialityRequirement": "NOT_DEFINED",
-                "integrityRequirement": "NOT_DEFINED",
-                "availabilityRequirement": "NOT_DEFINED",
-                "modifiedAttackVector": "NOT_DEFINED",
-                "modifiedAttackComplexity": "NOT_DEFINED",
-                "modifiedAttackRequirements": "NOT_DEFINED",
-                "modifiedPrivilegesRequired": "NOT_DEFINED",
-                "modifiedUserInteraction": "NOT_DEFINED",
-                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
-                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
-                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
-                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
-                "modifiedSubIntegrityImpact": "NOT_DEFINED",
-                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            }
-          ],
-          "ssvcV203": [
-            {
-              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
-              "ssvcData": {
-                "options": [
-                  {
-                    "exploitation": "poc"
-                  },
-                  {
-                    "automatable": "yes"
-                  },
-                  {
-                    "technicalImpact": "partial"
-                  }
-                ],
-                "role": "CISA Coordinator",
-                "version": "2.0.3",
-                "id": "CVE-2026-129493",
-                "timestamp": "2026-11-16T20:07:41.319222Z"
-              }
-            }
-          ],
-          "cvssMetricV31": [
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Primary",
-              "exploitabilityScore": 3.9,
-              "impactScore": 3.6,
-              "cvssData": {
-                "version": "3.1",
-                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "privilegesRequired": "NONE",
-                "userInteraction": "NONE",
-                "scope": "UNCHANGED",
-                "confidentialityImpact": "HIGH",
-                "integrityImpact": "NONE",
-                "availabilityImpact": "NONE",
-                "baseScore": 7.5,
-                "baseSeverity": "HIGH"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "cve": {
-        "id": "CVE-2026-129494",
-        "sourceIdentifier": "disclosure@vulncheck.com",
-        "vulnStatus": "Received",
-        "published": "2026-11-16T01:17:20.053",
-        "lastModified": "2026-11-18T14:17:35.477",
-        "descriptions": [
-          {
-            "lang": "en",
-            "value": "CloudPaste 1.1.0 through 1.9.1 contains an information disclosure vulnerability that allows unauthenticated attackers to obtain WebDAV storage credentials through the unauthenticated /api/proxy/link endpoint. Attackers who know a public share slug can retrieve the Basic Authorization header containing the WebDAV username and password, then read, modify, or delete files on the WebDAV server."
-          }
-        ],
-        "references": [
-          {
-            "url": "https://github.com/ling-drag0n/CloudPaste/blob/282ea1c7fbbcd4fab40527664bf7479fd5bb922d/backend/src/routes/proxyLinkRoutes.js#L139-L167",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://github.com/ling-drag0n/CloudPaste/blob/282ea1c7fbbcd4fab40527664bf7479fd5bb922d/backend/src/storage/drivers/webdav/WebDavStorageDriver.js#L800-L819",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://github.com/ling-drag0n/CloudPaste/issues/223",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://vul.yulun.ac.cn/20261115/cloudpaste/",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://www.vulncheck.com/advisories/cloudpaste-1.1.0-through-1.9.1-webdav-credential-disclosure-via-api-proxy-link",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://vul.yulun.ac.cn/20261115/cloudpaste/",
-            "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0"
-          }
-        ],
-        "weaknesses": [
-          {
-            "source": "disclosure@vulncheck.com",
-            "type": "Primary",
-            "description": [
-              {
-                "lang": "en",
-                "value": "CWE-522"
-              }
-            ]
-          }
-        ],
-        "affected": [
-          {
-            "source": "disclosure@vulncheck.com",
-            "affectedData": [
-              {
-                "vendor": "ling-drag0n",
-                "product": "CloudPaste",
-                "repo": "https://github.com/ling-drag0n/CloudPaste",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "1.1.0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThanOrEqual": "1.9.1"
-                  }
-                ],
-                "packageURL": "pkg:github/ling-drag0n/CloudPaste"
-              }
-            ]
-          }
-        ],
-        "cveTags": [],
-        "metrics": {
-          "cvssMetricV40": [
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Primary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N",
-                "baseScore": 8.7,
-                "baseSeverity": "HIGH",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "NONE",
-                "userInteraction": "NONE",
-                "vulnConfidentialityImpact": "HIGH",
-                "vulnIntegrityImpact": "NONE",
-                "vulnAvailabilityImpact": "NONE",
-                "subConfidentialityImpact": "NONE",
-                "subIntegrityImpact": "NONE",
-                "subAvailabilityImpact": "NONE",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            },
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Secondary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
-                "baseScore": 8.7,
-                "baseSeverity": "HIGH",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "NONE",
-                "userInteraction": "NONE",
-                "vulnConfidentialityImpact": "HIGH",
-                "vulnIntegrityImpact": "NONE",
-                "vulnAvailabilityImpact": "NONE",
-                "subConfidentialityImpact": "NONE",
-                "subIntegrityImpact": "NONE",
-                "subAvailabilityImpact": "NONE",
-                "exploitMaturity": "NOT_DEFINED",
-                "confidentialityRequirement": "NOT_DEFINED",
-                "integrityRequirement": "NOT_DEFINED",
-                "availabilityRequirement": "NOT_DEFINED",
-                "modifiedAttackVector": "NOT_DEFINED",
-                "modifiedAttackComplexity": "NOT_DEFINED",
-                "modifiedAttackRequirements": "NOT_DEFINED",
-                "modifiedPrivilegesRequired": "NOT_DEFINED",
-                "modifiedUserInteraction": "NOT_DEFINED",
-                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
-                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
-                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
-                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
-                "modifiedSubIntegrityImpact": "NOT_DEFINED",
-                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            }
-          ],
-          "ssvcV203": [
-            {
-              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
-              "ssvcData": {
-                "options": [
-                  {
-                    "exploitation": "poc"
-                  },
-                  {
-                    "automatable": "yes"
-                  },
-                  {
-                    "technicalImpact": "partial"
-                  }
-                ],
-                "role": "CISA Coordinator",
-                "version": "2.0.3",
-                "id": "CVE-2026-129494",
-                "timestamp": "2026-11-18T14:04:31.464939Z"
-              }
-            }
-          ],
-          "cvssMetricV31": [
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Primary",
-              "exploitabilityScore": 3.9,
-              "impactScore": 3.6,
-              "cvssData": {
-                "version": "3.1",
-                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "privilegesRequired": "NONE",
-                "userInteraction": "NONE",
-                "scope": "UNCHANGED",
-                "confidentialityImpact": "HIGH",
-                "integrityImpact": "NONE",
-                "availabilityImpact": "NONE",
-                "baseScore": 7.5,
-                "baseSeverity": "HIGH"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "cve": {
-        "id": "CVE-2026-129539",
-        "sourceIdentifier": "disclosure@vulncheck.com",
-        "vulnStatus": "Received",
-        "published": "2026-11-16T02:17:11.940",
-        "lastModified": "2026-11-16T19:17:43.440",
-        "descriptions": [
-          {
-            "lang": "en",
-            "value": "SSCMS 7.2.0 through 7.4.0 contains an arbitrary file read vulnerability that allows any registered user-center account to copy server files by supplying source paths to the layerImageUpload endpoint. Attackers can send siteId 0 with crafted filePaths entries to copy configuration files into their public sitefiles/home upload directory and download them anonymously."
-          }
-        ],
-        "references": [
-          {
-            "url": "https://github.com/siteserver/cms/blob/09ab59b9dd422782d9e1fe54f05088645f7c93e7/src/SSCMS.Web/Controllers/Home/Common/Form/LayerImageUploadController.Submit.cs#L114-L130",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://github.com/siteserver/cms/issues/3909",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://vul.yulun.ac.cn/20261114/siteserver-cms/",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://www.vulncheck.com/advisories/sscms-7.2.0-through-7.4.0-arbitrary-file-read-via-layerimageupload-endpoint",
-            "source": "disclosure@vulncheck.com"
-          }
-        ],
-        "weaknesses": [
-          {
-            "source": "disclosure@vulncheck.com",
-            "type": "Primary",
-            "description": [
-              {
-                "lang": "en",
-                "value": "CWE-73"
-              }
-            ]
-          }
-        ],
-        "affected": [
-          {
-            "source": "disclosure@vulncheck.com",
-            "affectedData": [
-              {
-                "vendor": "siteserver",
-                "product": "SSCMS",
-                "repo": "https://github.com/siteserver/cms",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "7.2.0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThanOrEqual": "7.4.0"
-                  }
-                ],
-                "packageURL": "pkg:github/siteserver/cms"
-              }
-            ]
-          }
-        ],
-        "cveTags": [],
-        "vcConfigurations": [
-          {
-            "nodes": [
-              {
-                "cpeMatch": [
-                  {
-                    "vulnerable": true,
-                    "criteria": "cpe:2.3:a:sscms:sscms:*:*:*:*:*:*:*:*",
-                    "versionStartIncluding": "7.2.0",
-                    "versionEndIncluding": "7.4.0"
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        "metrics": {
-          "cvssMetricV40": [
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Primary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N",
-                "baseScore": 7.1,
-                "baseSeverity": "HIGH",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "LOW",
-                "userInteraction": "NONE",
-                "vulnConfidentialityImpact": "HIGH",
-                "vulnIntegrityImpact": "NONE",
-                "vulnAvailabilityImpact": "NONE",
-                "subConfidentialityImpact": "NONE",
-                "subIntegrityImpact": "NONE",
-                "subAvailabilityImpact": "NONE",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            },
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Secondary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
-                "baseScore": 7.1,
-                "baseSeverity": "HIGH",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "LOW",
-                "userInteraction": "NONE",
-                "vulnConfidentialityImpact": "HIGH",
-                "vulnIntegrityImpact": "NONE",
-                "vulnAvailabilityImpact": "NONE",
-                "subConfidentialityImpact": "NONE",
-                "subIntegrityImpact": "NONE",
-                "subAvailabilityImpact": "NONE",
-                "exploitMaturity": "NOT_DEFINED",
-                "confidentialityRequirement": "NOT_DEFINED",
-                "integrityRequirement": "NOT_DEFINED",
-                "availabilityRequirement": "NOT_DEFINED",
-                "modifiedAttackVector": "NOT_DEFINED",
-                "modifiedAttackComplexity": "NOT_DEFINED",
-                "modifiedAttackRequirements": "NOT_DEFINED",
-                "modifiedPrivilegesRequired": "NOT_DEFINED",
-                "modifiedUserInteraction": "NOT_DEFINED",
-                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
-                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
-                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
-                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
-                "modifiedSubIntegrityImpact": "NOT_DEFINED",
-                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            }
-          ],
-          "ssvcV203": [
-            {
-              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
-              "ssvcData": {
-                "options": [
-                  {
-                    "exploitation": "none"
-                  },
-                  {
-                    "automatable": "no"
-                  },
-                  {
-                    "technicalImpact": "partial"
-                  }
-                ],
-                "role": "CISA Coordinator",
-                "version": "2.0.3",
-                "id": "CVE-2026-129539",
-                "timestamp": "2026-11-16T18:20:51.282720Z"
-              }
-            }
-          ],
-          "cvssMetricV31": [
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Primary",
-              "exploitabilityScore": 2.8,
-              "impactScore": 3.6,
-              "cvssData": {
-                "version": "3.1",
-                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "privilegesRequired": "LOW",
-                "userInteraction": "NONE",
-                "scope": "UNCHANGED",
-                "confidentialityImpact": "HIGH",
-                "integrityImpact": "NONE",
-                "availabilityImpact": "NONE",
-                "baseScore": 6.5,
-                "baseSeverity": "MEDIUM"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "cve": {
-        "id": "CVE-2026-129540",
-        "sourceIdentifier": "disclosure@vulncheck.com",
-        "vulnStatus": "Received",
-        "published": "2026-11-16T02:17:12.100",
-        "lastModified": "2026-11-16T16:17:52.400",
-        "descriptions": [
-          {
-            "lang": "en",
-            "value": "VoAPI 1.0.0 through 1.2.0 contains a sql injection vulnerability that allows authenticated users to inject SQL by supplying crafted column names as search[...] filter keys on list endpoints such as GET /api/log. Attackers can read the HS256 JWT signing secret from the option table and forge a manager role token to take over the /api/m/* management API."
-          }
-        ],
-        "references": [
-          {
-            "url": "https://github.com/VoAPI/VoAPI/issues/78",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://vul.yulun.ac.cn/20261115/voapi/",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://www.vulncheck.com/advisories/voapi-1.0.0-through-1.2.0-sql-injection-via-search-filter-key",
-            "source": "disclosure@vulncheck.com"
-          }
-        ],
-        "weaknesses": [
-          {
-            "source": "disclosure@vulncheck.com",
-            "type": "Primary",
-            "description": [
-              {
-                "lang": "en",
-                "value": "CWE-89"
-              }
-            ]
-          }
-        ],
-        "affected": [
-          {
-            "source": "disclosure@vulncheck.com",
-            "affectedData": [
-              {
-                "vendor": "VoAPI",
-                "product": "VoAPI",
-                "repo": "https://github.com/VoAPI/VoAPI",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "1.0.0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThanOrEqual": "1.2.0"
-                  }
-                ],
-                "packageURL": "pkg:github/VoAPI/VoAPI"
-              }
-            ]
-          }
-        ],
-        "cveTags": [
-          {
-            "sourceIdentifier": "disclosure@vulncheck.com",
-            "tags": [
-              "unsupported-when-assigned"
-            ]
-          }
-        ],
-        "metrics": {
-          "cvssMetricV40": [
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Primary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N",
-                "baseScore": 8.7,
-                "baseSeverity": "HIGH",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "LOW",
-                "userInteraction": "NONE",
-                "vulnConfidentialityImpact": "HIGH",
-                "vulnIntegrityImpact": "HIGH",
-                "vulnAvailabilityImpact": "HIGH",
-                "subConfidentialityImpact": "NONE",
-                "subIntegrityImpact": "NONE",
-                "subAvailabilityImpact": "NONE",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            },
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Secondary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
-                "baseScore": 8.7,
-                "baseSeverity": "HIGH",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "LOW",
-                "userInteraction": "NONE",
-                "vulnConfidentialityImpact": "HIGH",
-                "vulnIntegrityImpact": "HIGH",
-                "vulnAvailabilityImpact": "HIGH",
-                "subConfidentialityImpact": "NONE",
-                "subIntegrityImpact": "NONE",
-                "subAvailabilityImpact": "NONE",
-                "exploitMaturity": "NOT_DEFINED",
-                "confidentialityRequirement": "NOT_DEFINED",
-                "integrityRequirement": "NOT_DEFINED",
-                "availabilityRequirement": "NOT_DEFINED",
-                "modifiedAttackVector": "NOT_DEFINED",
-                "modifiedAttackComplexity": "NOT_DEFINED",
-                "modifiedAttackRequirements": "NOT_DEFINED",
-                "modifiedPrivilegesRequired": "NOT_DEFINED",
-                "modifiedUserInteraction": "NOT_DEFINED",
-                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
-                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
-                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
-                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
-                "modifiedSubIntegrityImpact": "NOT_DEFINED",
-                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            }
-          ],
-          "ssvcV203": [
-            {
-              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
-              "ssvcData": {
-                "options": [
-                  {
-                    "exploitation": "none"
-                  },
-                  {
-                    "automatable": "no"
-                  },
-                  {
-                    "technicalImpact": "total"
-                  }
-                ],
-                "role": "CISA Coordinator",
-                "version": "2.0.3",
-                "id": "CVE-2026-129540",
-                "timestamp": "2026-11-16T16:00:17.628268Z"
-              }
-            }
-          ],
-          "cvssMetricV31": [
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Primary",
-              "exploitabilityScore": 2.8,
-              "impactScore": 5.9,
-              "cvssData": {
-                "version": "3.1",
-                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "privilegesRequired": "LOW",
-                "userInteraction": "NONE",
-                "scope": "UNCHANGED",
-                "confidentialityImpact": "HIGH",
-                "integrityImpact": "HIGH",
-                "availabilityImpact": "HIGH",
-                "baseScore": 8.8,
-                "baseSeverity": "HIGH"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "cve": {
-        "id": "CVE-2026-129541",
-        "sourceIdentifier": "disclosure@vulncheck.com",
-        "vulnStatus": "Deferred",
-        "published": "2026-11-16T02:17:12.273",
-        "lastModified": "2026-11-19T21:44:59.793",
-        "descriptions": [
-          {
-            "lang": "en",
-            "value": "EdgeChat 2.5.0 through 2.21.0 contains a cross-site scripting vulnerability that allows invited users to inject HTML through unescaped usernames in the Vditor @-mention autocomplete. Attackers can register with a username containing an img onerror payload that executes when mentioned, stealing the localStorage session token to take over victim accounts."
-          }
-        ],
-        "references": [
-          {
-            "url": "https://github.com/aozorae/Edgechat/blob/6719ca1a9d50c74285867f9c0e8209983391b8d5/frontend/src/components/chat/VditorComposerEditor.vue#L112-L117",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://github.com/aozorae/Edgechat/blob/6719ca1a9d50c74285867f9c0e8209983391b8d5/frontend/src/components/chat/VditorComposerEditor.vue#L42-L54",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://github.com/aozorae/Edgechat/issues/60",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://vul.yulun.ac.cn/20261115/edgechat/",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://www.vulncheck.com/advisories/edgechat-2.5.0-through-2.21.0-xss-via-mention-autocomplete-username",
-            "source": "disclosure@vulncheck.com"
-          },
-          {
-            "url": "https://vul.yulun.ac.cn/20261115/edgechat/",
-            "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0"
-          }
-        ],
-        "weaknesses": [
-          {
-            "source": "disclosure@vulncheck.com",
-            "type": "Primary",
-            "description": [
-              {
-                "lang": "en",
-                "value": "CWE-79"
-              }
-            ]
-          }
-        ],
-        "affected": [
-          {
-            "source": "disclosure@vulncheck.com",
-            "affectedData": [
-              {
-                "vendor": "aozorae",
-                "product": "EdgeChat",
-                "repo": "https://github.com/aozorae/Edgechat",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "2.5.0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThanOrEqual": "2.21.0"
-                  }
-                ],
-                "packageURL": "pkg:github/aozorae/edgechat"
-              }
-            ]
-          }
-        ],
-        "cveTags": [],
-        "metrics": {
-          "cvssMetricV40": [
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Primary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:P/VC:L/VI:L/VA:N/SC:L/SI:L/SA:N",
-                "baseScore": 5.1,
-                "baseSeverity": "MEDIUM",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "LOW",
-                "userInteraction": "PASSIVE",
-                "vulnConfidentialityImpact": "LOW",
-                "vulnIntegrityImpact": "LOW",
-                "vulnAvailabilityImpact": "NONE",
-                "subConfidentialityImpact": "LOW",
-                "subIntegrityImpact": "LOW",
-                "subAvailabilityImpact": "NONE",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            },
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Secondary",
-              "cvssData": {
-                "version": "4.0",
-                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:P/VC:L/VI:L/VA:N/SC:L/SI:L/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
-                "baseScore": 5.1,
-                "baseSeverity": "MEDIUM",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "attackRequirements": "NONE",
-                "privilegesRequired": "LOW",
-                "userInteraction": "PASSIVE",
-                "vulnConfidentialityImpact": "LOW",
-                "vulnIntegrityImpact": "LOW",
-                "vulnAvailabilityImpact": "NONE",
-                "subConfidentialityImpact": "LOW",
-                "subIntegrityImpact": "LOW",
-                "subAvailabilityImpact": "NONE",
-                "exploitMaturity": "NOT_DEFINED",
-                "confidentialityRequirement": "NOT_DEFINED",
-                "integrityRequirement": "NOT_DEFINED",
-                "availabilityRequirement": "NOT_DEFINED",
-                "modifiedAttackVector": "NOT_DEFINED",
-                "modifiedAttackComplexity": "NOT_DEFINED",
-                "modifiedAttackRequirements": "NOT_DEFINED",
-                "modifiedPrivilegesRequired": "NOT_DEFINED",
-                "modifiedUserInteraction": "NOT_DEFINED",
-                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
-                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
-                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
-                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
-                "modifiedSubIntegrityImpact": "NOT_DEFINED",
-                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
-                "Safety": "NOT_DEFINED",
-                "Automatable": "NOT_DEFINED",
-                "Recovery": "NOT_DEFINED",
-                "valueDensity": "NOT_DEFINED",
-                "vulnerabilityResponseEffort": "NOT_DEFINED",
-                "providerUrgency": "NOT_DEFINED"
-              }
-            }
-          ],
-          "ssvcV203": [
-            {
-              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
-              "ssvcData": {
-                "options": [
-                  {
-                    "exploitation": "poc"
-                  },
-                  {
-                    "automatable": "no"
-                  },
-                  {
-                    "technicalImpact": "partial"
-                  }
-                ],
-                "role": "CISA Coordinator",
-                "version": "2.0.3",
-                "id": "CVE-2026-129541",
-                "timestamp": "2026-11-16T20:03:37.471584Z"
-              }
-            }
-          ],
-          "cvssMetricV31": [
-            {
-              "source": "disclosure@vulncheck.com",
-              "type": "Primary",
-              "exploitabilityScore": 2.3,
-              "impactScore": 2.7,
-              "cvssData": {
-                "version": "3.1",
-                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:L/A:N",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "privilegesRequired": "LOW",
-                "userInteraction": "REQUIRED",
-                "scope": "CHANGED",
-                "confidentialityImpact": "LOW",
-                "integrityImpact": "LOW",
-                "availabilityImpact": "NONE",
-                "baseScore": 5.4,
-                "baseSeverity": "MEDIUM"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "cve": {
-        "id": "CVE-2026-129542",
-        "sourceIdentifier": "PSIRT@samsung.com",
-        "vulnStatus": "Received",
-        "published": "2026-11-16T02:17:12.427",
-        "lastModified": "2026-11-16T21:17:27.310",
-        "descriptions": [
-          {
-            "lang": "en",
-            "value": "Files or directories accessible to external parties vulnerability in Samsung Open Source Starfish allows Probe System Files."
-          }
-        ],
-        "references": [
-          {
-            "url": "https://github.com/Samsung/starfish",
-            "source": "PSIRT@samsung.com"
-          }
-        ],
-        "weaknesses": [
-          {
-            "source": "PSIRT@samsung.com",
-            "type": "Secondary",
-            "description": [
-              {
-                "lang": "en",
-                "value": "CWE-552"
-              }
-            ]
-          }
-        ],
-        "affected": [
-          {
-            "source": "PSIRT@samsung.com",
-            "affectedData": [
-              {
-                "vendor": "Samsung Open Source",
-                "product": "Starfish",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "62853bf11e5f452c36a154a8b3786dda4a0016e7",
-                    "status": "unaffected"
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        "cveTags": [],
-        "metrics": {
-          "ssvcV203": [
-            {
-              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
-              "ssvcData": {
-                "options": [
-                  {
-                    "exploitation": "none"
-                  },
-                  {
-                    "automatable": "no"
-                  },
-                  {
-                    "technicalImpact": "partial"
-                  }
-                ],
-                "role": "CISA Coordinator",
-                "version": "2.0.3",
-                "id": "CVE-2026-129542",
-                "timestamp": "2026-11-16T20:29:25.440445Z"
-              }
-            }
-          ],
-          "cvssMetricV31": [
-            {
-              "source": "PSIRT@samsung.com",
-              "type": "Secondary",
-              "exploitabilityScore": 1.6,
-              "impactScore": 1.4,
-              "cvssData": {
-                "version": "3.1",
-                "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
-                "attackVector": "NETWORK",
-                "attackComplexity": "HIGH",
-                "privilegesRequired": "NONE",
-                "userInteraction": "REQUIRED",
-                "scope": "UNCHANGED",
-                "confidentialityImpact": "LOW",
-                "integrityImpact": "NONE",
-                "availabilityImpact": "NONE",
-                "baseScore": 3.1,
-                "baseSeverity": "LOW"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "cve": {
-        "id": "CVE-2026-129543",
-        "sourceIdentifier": "PSIRT@samsung.com",
-        "vulnStatus": "Received",
-        "published": "2026-11-16T02:17:12.557",
-        "lastModified": "2026-11-16T21:17:28.030",
-        "descriptions": [
-          {
-            "lang": "en",
-            "value": "Access of resource using incompatible type ('type confusion') vulnerability in Samsung Open Source Starfish allows Input Data Manipulation."
-          }
-        ],
-        "references": [
-          {
-            "url": "https://github.com/Samsung/starfish",
-            "source": "PSIRT@samsung.com"
-          }
-        ],
-        "weaknesses": [
-          {
-            "source": "PSIRT@samsung.com",
-            "type": "Secondary",
-            "description": [
-              {
-                "lang": "en",
-                "value": "CWE-843"
-              }
-            ]
-          }
-        ],
-        "affected": [
-          {
-            "source": "PSIRT@samsung.com",
-            "affectedData": [
-              {
-                "vendor": "Samsung Open Source",
-                "product": "Starfish",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "62853bf11e5f452c36a154a8b3786dda4a0016e7",
-                    "status": "unaffected"
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        "cveTags": [],
-        "metrics": {
-          "ssvcV203": [
-            {
-              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
-              "ssvcData": {
-                "options": [
-                  {
-                    "exploitation": "none"
-                  },
-                  {
-                    "automatable": "no"
-                  },
-                  {
-                    "technicalImpact": "partial"
-                  }
-                ],
-                "role": "CISA Coordinator",
-                "version": "2.0.3",
-                "id": "CVE-2026-129543",
-                "timestamp": "2026-11-16T20:29:19.605098Z"
-              }
-            }
-          ],
-          "cvssMetricV31": [
-            {
-              "source": "PSIRT@samsung.com",
-              "type": "Secondary",
-              "exploitabilityScore": 1.6,
-              "impactScore": 4.7,
-              "cvssData": {
-                "version": "3.1",
-                "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:H",
-                "attackVector": "NETWORK",
-                "attackComplexity": "HIGH",
-                "privilegesRequired": "NONE",
-                "userInteraction": "REQUIRED",
-                "scope": "UNCHANGED",
-                "confidentialityImpact": "LOW",
-                "integrityImpact": "LOW",
-                "availabilityImpact": "HIGH",
-                "baseScore": 6.4,
-                "baseSeverity": "MEDIUM"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "cve": {
-        "id": "CVE-2026-107520",
-        "sourceIdentifier": "security_alert@emc.com",
-        "vulnStatus": "Awaiting Analysis",
-        "published": "2026-11-16T04:16:44.033",
-        "lastModified": "2026-11-16T20:37:04.673",
-        "descriptions": [
-          {
-            "lang": "en",
-            "value": "Dell PowerStore contains a stored cross-site scripting (XSS) vulnerability. A low-privileged authenticated attacker could exploit this vulnerability, potentially leading to execution of malicious script in a higher-privileged user's session."
-          }
-        ],
-        "references": [
-          {
-            "url": "https://www.dell.com/support/kbdoc/en-us/000527640/dsa-2026-479-dell-powerstore-t-security-update-for-multiple-vulnerabilities",
-            "source": "security_alert@emc.com"
-          }
-        ],
-        "weaknesses": [
-          {
-            "source": "security_alert@emc.com",
-            "type": "Secondary",
-            "description": [
-              {
-                "lang": "en",
-                "value": "CWE-79"
-              }
-            ]
-          }
-        ],
-        "affected": [
-          {
-            "source": "security_alert@emc.com",
-            "affectedData": [
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 500T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 1000T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 1200T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 3000T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 3200Q",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 3200T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 5000T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 5200Q",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 5200T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 7000T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 9000T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 9200T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 1500",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 5500",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 9500",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        "cveTags": [],
-        "metrics": {
-          "ssvcV203": [
-            {
-              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
-              "ssvcData": {
-                "options": [
-                  {
-                    "exploitation": "none"
-                  },
-                  {
-                    "automatable": "no"
-                  },
-                  {
-                    "technicalImpact": "partial"
-                  }
-                ],
-                "role": "CISA Coordinator",
-                "version": "2.0.3",
-                "id": "CVE-2026-107520",
-                "timestamp": "2026-11-16T15:54:48.360879Z"
-              }
-            }
-          ],
-          "cvssMetricV31": [
-            {
-              "source": "security_alert@emc.com",
-              "type": "Secondary",
-              "exploitabilityScore": 2.3,
-              "impactScore": 2.7,
-              "cvssData": {
-                "version": "3.1",
-                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:L/A:N",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "privilegesRequired": "LOW",
-                "userInteraction": "REQUIRED",
-                "scope": "CHANGED",
-                "confidentialityImpact": "LOW",
-                "integrityImpact": "LOW",
-                "availabilityImpact": "NONE",
-                "baseScore": 5.4,
-                "baseSeverity": "MEDIUM"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "cve": {
-        "id": "CVE-2026-82156",
-        "sourceIdentifier": "security_alert@emc.com",
-        "vulnStatus": "Awaiting Analysis",
-        "published": "2026-11-16T04:16:44.230",
-        "lastModified": "2026-11-17T05:18:37.863",
-        "descriptions": [
-          {
-            "lang": "en",
-            "value": "Dell PowerStore contains an authorization-bypass vulnerability. A low-privileged attacker could exploit it, potentially leading to elevation of privilege to administrator."
-          }
-        ],
-        "references": [
-          {
-            "url": "https://www.dell.com/support/kbdoc/en-us/000527640/dsa-2026-479-dell-powerstore-t-security-update-for-multiple-vulnerabilities",
-            "source": "security_alert@emc.com"
-          }
-        ],
-        "weaknesses": [
-          {
-            "source": "security_alert@emc.com",
-            "type": "Secondary",
-            "description": [
-              {
-                "lang": "en",
-                "value": "CWE-863"
-              }
-            ]
-          }
-        ],
-        "affected": [
-          {
-            "source": "security_alert@emc.com",
-            "affectedData": [
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 500T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 1000T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 1200T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 3000T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 3200Q",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 3200T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 5000T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 5200Q",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 5200T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 7000T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 9000T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 9200T",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 1500",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 5500",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              },
-              {
-                "vendor": "Dell",
-                "product": "PowerStore 9500",
-                "defaultStatus": "unaffected",
-                "versions": [
-                  {
-                    "version": "0",
-                    "status": "affected",
-                    "versionType": "semver",
-                    "lessThan": "5.1.0.0-2798105 or later"
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        "cveTags": [],
-        "metrics": {
-          "ssvcV203": [
-            {
-              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
-              "ssvcData": {
-                "options": [
-                  {
-                    "exploitation": "none"
-                  },
-                  {
-                    "automatable": "no"
-                  },
-                  {
-                    "technicalImpact": "total"
-                  }
-                ],
-                "role": "CISA Coordinator",
-                "version": "2.0.3",
-                "id": "CVE-2026-82156",
-                "timestamp": "2026-11-16T00:00:00+00:00"
-              }
-            }
-          ],
-          "cvssMetricV31": [
-            {
-              "source": "security_alert@emc.com",
-              "type": "Secondary",
-              "exploitabilityScore": 2.8,
-              "impactScore": 5.9,
-              "cvssData": {
-                "version": "3.1",
-                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-                "attackVector": "NETWORK",
-                "attackComplexity": "LOW",
-                "privilegesRequired": "LOW",
-                "userInteraction": "NONE",
-                "scope": "UNCHANGED",
-                "confidentialityImpact": "HIGH",
-                "integrityImpact": "HIGH",
-                "availabilityImpact": "HIGH",
-                "baseScore": 8.8,
-                "baseSeverity": "HIGH"
-              }
-            }
-          ]
-        }
-      }
-    },
     {
       "cve": {
         "id": "CVE-2026-121786",
@@ -8459,6 +6325,2070 @@
                 "version": "2.0.3",
                 "id": "CVE-2026-116288",
                 "timestamp": "2026-11-16T20:24:56.529696Z"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-123745",
+        "sourceIdentifier": "security@octopus.com",
+        "vulnStatus": "Awaiting Analysis",
+        "published": "2026-11-16T12:17:46.170",
+        "lastModified": "2026-11-17T19:17:48.660",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "In affected versions of Octopus Server, improper path validation allowed a user with scoped runbook permissions to execute runbooks on offline package drop targets, this could result in exposure of Server working-directory files outside their permitted scope and deletion of those files."
+          }
+        ],
+        "references": [
+          {
+            "url": "https://advisories.octopus.com/post/2026/sa2026-26",
+            "source": "security@octopus.com"
+          }
+        ],
+        "weaknesses": [
+          {
+            "source": "security@octopus.com",
+            "type": "Secondary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-22"
+              }
+            ]
+          }
+        ],
+        "affected": [
+          {
+            "source": "security@octopus.com",
+            "affectedData": [
+              {
+                "vendor": "Octopus Deploy",
+                "product": "Octopus Server",
+                "platforms": [
+                  "Windows",
+                  "Linux"
+                ],
+                "defaultStatus": "unaffected",
+                "versions": [
+                  {
+                    "version": "2019.10.6",
+                    "status": "affected",
+                    "versionType": "custom",
+                    "lessThan": "2026.2.13558"
+                  },
+                  {
+                    "version": "2026.3.0",
+                    "status": "affected",
+                    "versionType": "custom",
+                    "lessThan": "2026.3.16030"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cveTags": [],
+        "vcConfigurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:octopus:octopus_server:*:*:*:*:*:*:*:*",
+                    "versionStartIncluding": "2019.10.6",
+                    "versionEndExcluding": "2026.2.13558"
+                  },
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:octopus:octopus_server:*:*:*:*:*:*:*:*",
+                    "versionStartIncluding": "2026.3.0",
+                    "versionEndExcluding": "2026.3.16030"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "vcConfigurationsWithPlatforms": [
+          {
+            "operator": "AND",
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:octopus:octopus_server:*:*:*:*:*:*:*:*",
+                    "versionStartIncluding": "2019.10.6",
+                    "versionEndExcluding": "2026.2.13558"
+                  },
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:octopus:octopus_server:*:*:*:*:*:*:*:*",
+                    "versionStartIncluding": "2026.3.0",
+                    "versionEndExcluding": "2026.3.16030"
+                  }
+                ]
+              },
+              {
+                "operator": "OR",
+                "cpeMatch": [
+                  {
+                    "vulnerable": false,
+                    "criteria": "cpe:2.3:o:linux:linux_kernel:-:*:*:*:*:*:*:*"
+                  },
+                  {
+                    "vulnerable": false,
+                    "criteria": "cpe:2.3:o:microsoft:windows:-:*:*:*:*:*:*:*"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "metrics": {
+          "cvssMetricV40": [
+            {
+              "source": "security@octopus.com",
+              "type": "Secondary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:N/VC:H/VI:L/VA:L/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+                "baseScore": 6.1,
+                "baseSeverity": "MEDIUM",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "PRESENT",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "LOW",
+                "vulnAvailabilityImpact": "LOW",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "exploitMaturity": "NOT_DEFINED",
+                "confidentialityRequirement": "NOT_DEFINED",
+                "integrityRequirement": "NOT_DEFINED",
+                "availabilityRequirement": "NOT_DEFINED",
+                "modifiedAttackVector": "NOT_DEFINED",
+                "modifiedAttackComplexity": "NOT_DEFINED",
+                "modifiedAttackRequirements": "NOT_DEFINED",
+                "modifiedPrivilegesRequired": "NOT_DEFINED",
+                "modifiedUserInteraction": "NOT_DEFINED",
+                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            }
+          ],
+          "ssvcV203": [
+            {
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+              "ssvcData": {
+                "options": [
+                  {
+                    "exploitation": "none"
+                  },
+                  {
+                    "automatable": "no"
+                  },
+                  {
+                    "technicalImpact": "partial"
+                  }
+                ],
+                "role": "CISA Coordinator",
+                "version": "2.0.3",
+                "id": "CVE-2026-123745",
+                "timestamp": "2026-11-17T17:44:17.350644Z"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-124629",
+        "sourceIdentifier": "security@octopus.com",
+        "vulnStatus": "Awaiting Analysis",
+        "published": "2026-11-16T12:17:46.640",
+        "lastModified": "2026-11-16T21:17:21.837",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "In affected versions of Octopus Server, insufficient authorization checks on scheduled project triggers allowed users who were permitted to deploy existing releases, but not to create new ones, to configure a trigger that could result in new releases being created and deployed without the required permission being assigned. The resulting audit events were attributed to the system rather than to the user who configured the trigger."
+          }
+        ],
+        "references": [
+          {
+            "url": "https://advisories.octopus.com/post/2026/sa2026-25",
+            "source": "security@octopus.com"
+          }
+        ],
+        "weaknesses": [
+          {
+            "source": "security@octopus.com",
+            "type": "Secondary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-863"
+              }
+            ]
+          }
+        ],
+        "affected": [
+          {
+            "source": "security@octopus.com",
+            "affectedData": [
+              {
+                "vendor": "Octopus Deploy",
+                "product": "Octopus Server",
+                "platforms": [
+                  "Windows",
+                  "Linux"
+                ],
+                "defaultStatus": "unaffected",
+                "versions": [
+                  {
+                    "version": "2018.4.0",
+                    "status": "affected",
+                    "versionType": "custom",
+                    "lessThan": "2026.2.13558"
+                  },
+                  {
+                    "version": "2026.3.0",
+                    "status": "affected",
+                    "versionType": "custom",
+                    "lessThan": "2026.3.16030"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cveTags": [],
+        "vcConfigurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:octopus:octopus_server:*:*:*:*:*:*:*:*",
+                    "versionStartIncluding": "2018.4.0",
+                    "versionEndExcluding": "2026.2.13558"
+                  },
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:octopus:octopus_server:*:*:*:*:*:*:*:*",
+                    "versionStartIncluding": "2026.3.0",
+                    "versionEndExcluding": "2026.3.16030"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "vcConfigurationsWithPlatforms": [
+          {
+            "operator": "AND",
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:octopus:octopus_server:*:*:*:*:*:*:*:*",
+                    "versionStartIncluding": "2018.4.0",
+                    "versionEndExcluding": "2026.2.13558"
+                  },
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:octopus:octopus_server:*:*:*:*:*:*:*:*",
+                    "versionStartIncluding": "2026.3.0",
+                    "versionEndExcluding": "2026.3.16030"
+                  }
+                ]
+              },
+              {
+                "operator": "OR",
+                "cpeMatch": [
+                  {
+                    "vulnerable": false,
+                    "criteria": "cpe:2.3:o:linux:linux_kernel:-:*:*:*:*:*:*:*"
+                  },
+                  {
+                    "vulnerable": false,
+                    "criteria": "cpe:2.3:o:microsoft:windows:-:*:*:*:*:*:*:*"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "metrics": {
+          "cvssMetricV40": [
+            {
+              "source": "security@octopus.com",
+              "type": "Secondary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+                "baseScore": 5.3,
+                "baseSeverity": "MEDIUM",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "NONE",
+                "vulnIntegrityImpact": "LOW",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "exploitMaturity": "NOT_DEFINED",
+                "confidentialityRequirement": "NOT_DEFINED",
+                "integrityRequirement": "NOT_DEFINED",
+                "availabilityRequirement": "NOT_DEFINED",
+                "modifiedAttackVector": "NOT_DEFINED",
+                "modifiedAttackComplexity": "NOT_DEFINED",
+                "modifiedAttackRequirements": "NOT_DEFINED",
+                "modifiedPrivilegesRequired": "NOT_DEFINED",
+                "modifiedUserInteraction": "NOT_DEFINED",
+                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            }
+          ],
+          "ssvcV203": [
+            {
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+              "ssvcData": {
+                "options": [
+                  {
+                    "exploitation": "none"
+                  },
+                  {
+                    "automatable": "no"
+                  },
+                  {
+                    "technicalImpact": "partial"
+                  }
+                ],
+                "role": "CISA Coordinator",
+                "version": "2.0.3",
+                "id": "CVE-2026-124629",
+                "timestamp": "2026-11-16T20:25:56.194812Z"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-124631",
+        "sourceIdentifier": "security@octopus.com",
+        "vulnStatus": "Awaiting Analysis",
+        "published": "2026-11-16T12:17:46.773",
+        "lastModified": "2026-11-16T21:17:21.953",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "In affected versions of Octopus Server, insufficient authorization checks allowed a low-privileged authenticated user to register an Argo CD gateway, which could result in unauthorized changes to Argo CD Application data for projects and environments outside their permissions within the same Space."
+          }
+        ],
+        "references": [
+          {
+            "url": "https://advisories.octopus.com/post/2026/sa2026-27",
+            "source": "security@octopus.com"
+          }
+        ],
+        "weaknesses": [
+          {
+            "source": "security@octopus.com",
+            "type": "Secondary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-863"
+              }
+            ]
+          }
+        ],
+        "affected": [
+          {
+            "source": "security@octopus.com",
+            "affectedData": [
+              {
+                "vendor": "Octopus Deploy",
+                "product": "Octopus Server",
+                "platforms": [
+                  "Windows",
+                  "Linux"
+                ],
+                "defaultStatus": "unaffected",
+                "versions": [
+                  {
+                    "version": "2025.4.4166",
+                    "status": "affected",
+                    "versionType": "custom",
+                    "lessThan": "2026.2.13577"
+                  },
+                  {
+                    "version": "2026.3.0",
+                    "status": "affected",
+                    "versionType": "custom",
+                    "lessThan": "2026.3.16030"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cveTags": [],
+        "vcConfigurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:octopus:octopus_server:*:*:*:*:*:*:*:*",
+                    "versionStartIncluding": "2025.4.4166",
+                    "versionEndExcluding": "2026.2.13577"
+                  },
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:octopus:octopus_server:*:*:*:*:*:*:*:*",
+                    "versionStartIncluding": "2026.3.0",
+                    "versionEndExcluding": "2026.3.16030"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "vcConfigurationsWithPlatforms": [
+          {
+            "operator": "AND",
+            "nodes": [
+              {
+                "operator": "OR",
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:octopus:octopus_server:*:*:*:*:*:*:*:*",
+                    "versionStartIncluding": "2025.4.4166",
+                    "versionEndExcluding": "2026.2.13577"
+                  },
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:octopus:octopus_server:*:*:*:*:*:*:*:*",
+                    "versionStartIncluding": "2026.3.0",
+                    "versionEndExcluding": "2026.3.16030"
+                  }
+                ]
+              },
+              {
+                "operator": "OR",
+                "cpeMatch": [
+                  {
+                    "vulnerable": false,
+                    "criteria": "cpe:2.3:o:linux:linux_kernel:-:*:*:*:*:*:*:*"
+                  },
+                  {
+                    "vulnerable": false,
+                    "criteria": "cpe:2.3:o:microsoft:windows:-:*:*:*:*:*:*:*"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "metrics": {
+          "cvssMetricV40": [
+            {
+              "source": "security@octopus.com",
+              "type": "Secondary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+                "baseScore": 5.3,
+                "baseSeverity": "MEDIUM",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "NONE",
+                "vulnIntegrityImpact": "LOW",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "exploitMaturity": "NOT_DEFINED",
+                "confidentialityRequirement": "NOT_DEFINED",
+                "integrityRequirement": "NOT_DEFINED",
+                "availabilityRequirement": "NOT_DEFINED",
+                "modifiedAttackVector": "NOT_DEFINED",
+                "modifiedAttackComplexity": "NOT_DEFINED",
+                "modifiedAttackRequirements": "NOT_DEFINED",
+                "modifiedPrivilegesRequired": "NOT_DEFINED",
+                "modifiedUserInteraction": "NOT_DEFINED",
+                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            }
+          ],
+          "ssvcV203": [
+            {
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+              "ssvcData": {
+                "options": [
+                  {
+                    "exploitation": "none"
+                  },
+                  {
+                    "automatable": "no"
+                  },
+                  {
+                    "technicalImpact": "partial"
+                  }
+                ],
+                "role": "CISA Coordinator",
+                "version": "2.0.3",
+                "id": "CVE-2026-124631",
+                "timestamp": "2026-11-16T20:25:20.894708Z"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-129545",
+        "sourceIdentifier": "disclosure@vulncheck.com",
+        "vulnStatus": "Received",
+        "published": "2026-11-16T12:17:52.203",
+        "lastModified": "2026-11-18T15:17:38.497",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Kalmia through 0.2.0 contains a privilege escalation vulnerability that allows low-privileged authenticated users to modify any account via the /kal-api/auth/user/edit endpoint. Attackers holding only read permission can set their admin flag and 'all' permission or reset an administrator's password to fully take over the instance."
+          }
+        ],
+        "references": [
+          {
+            "url": "https://github.com/DifuseHQ/Kalmia",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/DifuseHQ/Kalmia/blob/1bc059450c3901b17e1be99209965b12f6d163e4/services/auth.go#L183-L232",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/DifuseHQ/Kalmia/issues/35",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://www.vulncheck.com/advisories/kalmia-through-0.2.0-privilege-escalation-via-kal-api-auth-user-edit",
+            "source": "disclosure@vulncheck.com"
+          }
+        ],
+        "weaknesses": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-269"
+              }
+            ]
+          }
+        ],
+        "affected": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "affectedData": [
+              {
+                "vendor": "DifuseHQ",
+                "product": "Kalmia",
+                "repo": "https://github.com/DifuseHQ/Kalmia",
+                "defaultStatus": "unaffected",
+                "versions": [
+                  {
+                    "version": "0",
+                    "status": "affected",
+                    "versionType": "semver",
+                    "lessThanOrEqual": "0.2.0"
+                  }
+                ],
+                "packageURL": "pkg:golang/git.difuse.io/Difuse/kalmia"
+              }
+            ]
+          }
+        ],
+        "cveTags": [],
+        "metrics": {
+          "cvssMetricV40": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N",
+                "baseScore": 8.7,
+                "baseSeverity": "HIGH",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "HIGH",
+                "vulnAvailabilityImpact": "HIGH",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            },
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Secondary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+                "baseScore": 8.7,
+                "baseSeverity": "HIGH",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "HIGH",
+                "vulnAvailabilityImpact": "HIGH",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "exploitMaturity": "NOT_DEFINED",
+                "confidentialityRequirement": "NOT_DEFINED",
+                "integrityRequirement": "NOT_DEFINED",
+                "availabilityRequirement": "NOT_DEFINED",
+                "modifiedAttackVector": "NOT_DEFINED",
+                "modifiedAttackComplexity": "NOT_DEFINED",
+                "modifiedAttackRequirements": "NOT_DEFINED",
+                "modifiedPrivilegesRequired": "NOT_DEFINED",
+                "modifiedUserInteraction": "NOT_DEFINED",
+                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            }
+          ],
+          "ssvcV203": [
+            {
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+              "ssvcData": {
+                "options": [
+                  {
+                    "exploitation": "none"
+                  },
+                  {
+                    "automatable": "no"
+                  },
+                  {
+                    "technicalImpact": "total"
+                  }
+                ],
+                "role": "CISA Coordinator",
+                "version": "2.0.3",
+                "id": "CVE-2026-129545",
+                "timestamp": "2026-11-18T14:08:45.628102Z"
+              }
+            }
+          ],
+          "cvssMetricV31": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "exploitabilityScore": 2.8,
+              "impactScore": 5.9,
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "scope": "UNCHANGED",
+                "confidentialityImpact": "HIGH",
+                "integrityImpact": "HIGH",
+                "availabilityImpact": "HIGH",
+                "baseScore": 8.8,
+                "baseSeverity": "HIGH"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-129546",
+        "sourceIdentifier": "disclosure@vulncheck.com",
+        "vulnStatus": "Received",
+        "published": "2026-11-16T12:17:52.383",
+        "lastModified": "2026-11-16T19:17:43.590",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Kalmia through 0.2.0 contains an information disclosure vulnerability that allows authenticated read-only users to retrieve Git deployment credentials via documentation API responses. Attackers can query GET /kal-api/docs/documentations or POST /kal-api/docs/documentation to obtain plaintext gitUser and gitPassword values and authenticate to external Git repositories."
+          }
+        ],
+        "references": [
+          {
+            "url": "https://github.com/DifuseHQ/Kalmia",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/DifuseHQ/Kalmia/blob/1bc059450c3901b17e1be99209965b12f6d163e4/services/docs_docs.go#L52-L55",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/DifuseHQ/Kalmia/issues/35",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://www.vulncheck.com/advisories/kalmia-through-0.2.0-git-credential-disclosure-via-documentation-api",
+            "source": "disclosure@vulncheck.com"
+          }
+        ],
+        "weaknesses": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-200"
+              }
+            ]
+          }
+        ],
+        "affected": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "affectedData": [
+              {
+                "vendor": "DifuseHQ",
+                "product": "Kalmia",
+                "repo": "https://github.com/DifuseHQ/Kalmia",
+                "defaultStatus": "unaffected",
+                "versions": [
+                  {
+                    "version": "0",
+                    "status": "affected",
+                    "versionType": "semver",
+                    "lessThanOrEqual": "0.2.0"
+                  }
+                ],
+                "packageURL": "pkg:golang/git.difuse.io/Difuse/kalmia"
+              }
+            ]
+          }
+        ],
+        "cveTags": [],
+        "metrics": {
+          "cvssMetricV40": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N",
+                "baseScore": 7.1,
+                "baseSeverity": "HIGH",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "NONE",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            },
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Secondary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+                "baseScore": 7.1,
+                "baseSeverity": "HIGH",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "NONE",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "exploitMaturity": "NOT_DEFINED",
+                "confidentialityRequirement": "NOT_DEFINED",
+                "integrityRequirement": "NOT_DEFINED",
+                "availabilityRequirement": "NOT_DEFINED",
+                "modifiedAttackVector": "NOT_DEFINED",
+                "modifiedAttackComplexity": "NOT_DEFINED",
+                "modifiedAttackRequirements": "NOT_DEFINED",
+                "modifiedPrivilegesRequired": "NOT_DEFINED",
+                "modifiedUserInteraction": "NOT_DEFINED",
+                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            }
+          ],
+          "ssvcV203": [
+            {
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+              "ssvcData": {
+                "options": [
+                  {
+                    "exploitation": "none"
+                  },
+                  {
+                    "automatable": "no"
+                  },
+                  {
+                    "technicalImpact": "partial"
+                  }
+                ],
+                "role": "CISA Coordinator",
+                "version": "2.0.3",
+                "id": "CVE-2026-129546",
+                "timestamp": "2026-11-16T18:20:54.400701Z"
+              }
+            }
+          ],
+          "cvssMetricV31": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "exploitabilityScore": 2.8,
+              "impactScore": 3.6,
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "privilegesRequired": "LOW",
+                "userInteraction": "NONE",
+                "scope": "UNCHANGED",
+                "confidentialityImpact": "HIGH",
+                "integrityImpact": "NONE",
+                "availabilityImpact": "NONE",
+                "baseScore": 6.5,
+                "baseSeverity": "MEDIUM"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-129547",
+        "sourceIdentifier": "disclosure@vulncheck.com",
+        "vulnStatus": "Received",
+        "published": "2026-11-16T12:17:52.550",
+        "lastModified": "2026-11-16T15:17:21.640",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Kalmia through 0.2.0 contains an authentication bypass vulnerability in RsPressMiddleware that allows unauthenticated attackers to access private documentation by supplying any non-empty viewToken cookie. Attackers can send requests with a forged viewToken cookie, which is never validated as a JWT, to read all pages and assets of RequireAuth documentation sites."
+          }
+        ],
+        "references": [
+          {
+            "url": "https://github.com/DifuseHQ/Kalmia",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/DifuseHQ/Kalmia/blob/1bc059450c3901b17e1be99209965b12f6d163e4/middleware/rspress.go#L20-L70",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/DifuseHQ/Kalmia/issues/35",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://www.vulncheck.com/advisories/kalmia-through-0.2.0-authentication-bypass-via-viewtoken-cookie",
+            "source": "disclosure@vulncheck.com"
+          }
+        ],
+        "weaknesses": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-287"
+              }
+            ]
+          }
+        ],
+        "affected": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "affectedData": [
+              {
+                "vendor": "DifuseHQ",
+                "product": "Kalmia",
+                "repo": "https://github.com/DifuseHQ/Kalmia",
+                "defaultStatus": "unaffected",
+                "versions": [
+                  {
+                    "version": "0",
+                    "status": "affected",
+                    "versionType": "semver",
+                    "lessThanOrEqual": "0.2.0"
+                  }
+                ],
+                "packageURL": "pkg:golang/git.difuse.io/Difuse/kalmia"
+              }
+            ]
+          }
+        ],
+        "cveTags": [],
+        "metrics": {
+          "cvssMetricV40": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N",
+                "baseScore": 8.7,
+                "baseSeverity": "HIGH",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "NONE",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "NONE",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            },
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Secondary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+                "baseScore": 8.7,
+                "baseSeverity": "HIGH",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "NONE",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "NONE",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "exploitMaturity": "NOT_DEFINED",
+                "confidentialityRequirement": "NOT_DEFINED",
+                "integrityRequirement": "NOT_DEFINED",
+                "availabilityRequirement": "NOT_DEFINED",
+                "modifiedAttackVector": "NOT_DEFINED",
+                "modifiedAttackComplexity": "NOT_DEFINED",
+                "modifiedAttackRequirements": "NOT_DEFINED",
+                "modifiedPrivilegesRequired": "NOT_DEFINED",
+                "modifiedUserInteraction": "NOT_DEFINED",
+                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            }
+          ],
+          "ssvcV203": [
+            {
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+              "ssvcData": {
+                "options": [
+                  {
+                    "exploitation": "none"
+                  },
+                  {
+                    "automatable": "yes"
+                  },
+                  {
+                    "technicalImpact": "partial"
+                  }
+                ],
+                "role": "CISA Coordinator",
+                "version": "2.0.3",
+                "id": "CVE-2026-129547",
+                "timestamp": "2026-11-16T14:23:33.826746Z"
+              }
+            }
+          ],
+          "cvssMetricV31": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "exploitabilityScore": 3.9,
+              "impactScore": 3.6,
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "privilegesRequired": "NONE",
+                "userInteraction": "NONE",
+                "scope": "UNCHANGED",
+                "confidentialityImpact": "HIGH",
+                "integrityImpact": "NONE",
+                "availabilityImpact": "NONE",
+                "baseScore": 7.5,
+                "baseSeverity": "HIGH"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-129548",
+        "sourceIdentifier": "disclosure@vulncheck.com",
+        "vulnStatus": "Received",
+        "published": "2026-11-16T12:17:52.707",
+        "lastModified": "2026-11-16T20:19:02.030",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Kalmia through 0.2.0 contains a stored cross-site scripting vulnerability that allows read-only authenticated users to upload HTML or SVG files via the upload-file endpoint without type restrictions. Attackers can share links to files served unauthenticated through the file get route, executing JavaScript in the admin origin to steal administrator JWTs from localStorage."
+          }
+        ],
+        "references": [
+          {
+            "url": "https://github.com/DifuseHQ/Kalmia",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/DifuseHQ/Kalmia/blob/1bc059450c3901b17e1be99209965b12f6d163e4/handlers/file.go#L19-L61",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/DifuseHQ/Kalmia/issues/35",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://www.vulncheck.com/advisories/kalmia-through-0.2.0-stored-xss-via-unrestricted-file-upload",
+            "source": "disclosure@vulncheck.com"
+          }
+        ],
+        "weaknesses": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-434"
+              }
+            ]
+          }
+        ],
+        "affected": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "affectedData": [
+              {
+                "vendor": "DifuseHQ",
+                "product": "Kalmia",
+                "repo": "https://github.com/DifuseHQ/Kalmia",
+                "defaultStatus": "unaffected",
+                "versions": [
+                  {
+                    "version": "0",
+                    "status": "affected",
+                    "versionType": "semver",
+                    "lessThanOrEqual": "0.2.0"
+                  }
+                ],
+                "packageURL": "pkg:golang/git.difuse.io/Difuse/kalmia"
+              }
+            ]
+          }
+        ],
+        "cveTags": [],
+        "metrics": {
+          "cvssMetricV40": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:P/VC:L/VI:L/VA:N/SC:L/SI:L/SA:N",
+                "baseScore": 5.1,
+                "baseSeverity": "MEDIUM",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "LOW",
+                "userInteraction": "PASSIVE",
+                "vulnConfidentialityImpact": "LOW",
+                "vulnIntegrityImpact": "LOW",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "LOW",
+                "subIntegrityImpact": "LOW",
+                "subAvailabilityImpact": "NONE",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            },
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Secondary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:P/VC:L/VI:L/VA:N/SC:L/SI:L/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+                "baseScore": 5.1,
+                "baseSeverity": "MEDIUM",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "LOW",
+                "userInteraction": "PASSIVE",
+                "vulnConfidentialityImpact": "LOW",
+                "vulnIntegrityImpact": "LOW",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "LOW",
+                "subIntegrityImpact": "LOW",
+                "subAvailabilityImpact": "NONE",
+                "exploitMaturity": "NOT_DEFINED",
+                "confidentialityRequirement": "NOT_DEFINED",
+                "integrityRequirement": "NOT_DEFINED",
+                "availabilityRequirement": "NOT_DEFINED",
+                "modifiedAttackVector": "NOT_DEFINED",
+                "modifiedAttackComplexity": "NOT_DEFINED",
+                "modifiedAttackRequirements": "NOT_DEFINED",
+                "modifiedPrivilegesRequired": "NOT_DEFINED",
+                "modifiedUserInteraction": "NOT_DEFINED",
+                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            }
+          ],
+          "ssvcV203": [
+            {
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+              "ssvcData": {
+                "options": [
+                  {
+                    "exploitation": "none"
+                  },
+                  {
+                    "automatable": "no"
+                  },
+                  {
+                    "technicalImpact": "partial"
+                  }
+                ],
+                "role": "CISA Coordinator",
+                "version": "2.0.3",
+                "id": "CVE-2026-129548",
+                "timestamp": "2026-11-16T19:59:43.669549Z"
+              }
+            }
+          ],
+          "cvssMetricV31": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "exploitabilityScore": 2.3,
+              "impactScore": 2.7,
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:L/A:N",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "privilegesRequired": "LOW",
+                "userInteraction": "REQUIRED",
+                "scope": "CHANGED",
+                "confidentialityImpact": "LOW",
+                "integrityImpact": "LOW",
+                "availabilityImpact": "NONE",
+                "baseScore": 5.4,
+                "baseSeverity": "MEDIUM"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-129549",
+        "sourceIdentifier": "disclosure@vulncheck.com",
+        "vulnStatus": "Received",
+        "published": "2026-11-16T12:17:52.860",
+        "lastModified": "2026-11-18T14:17:35.613",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Tensei through 0.11.5 contains an unrestricted file upload vulnerability in the @tensei/media plugin that allows unauthenticated attackers to upload dangerous file types via the files/upload route. Attackers can set the multipart Content-Type to upload HTML or SVG files served from the application origin, causing stored cross-site scripting and storage consumption."
+          }
+        ],
+        "references": [
+          {
+            "url": "https://github.com/tenseijs/tensei",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/tenseijs/tensei/blob/630f39038c7751178465f990fb358b0c2d5b1914/packages/media/server/helpers/process-request.ts#L189-L216",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/tenseijs/tensei/issues/398",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://www.vulncheck.com/advisories/tensei-through-0.11.5-unauthenticated-file-upload-via-tensei-media-files-upload",
+            "source": "disclosure@vulncheck.com"
+          }
+        ],
+        "weaknesses": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-434"
+              }
+            ]
+          }
+        ],
+        "affected": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "affectedData": [
+              {
+                "vendor": "tenseijs",
+                "product": "@tensei/media",
+                "collectionURL": "https://www.npmjs.com",
+                "packageName": "@tensei/media",
+                "repo": "https://github.com/tenseijs/tensei",
+                "defaultStatus": "unaffected",
+                "versions": [
+                  {
+                    "version": "0",
+                    "status": "affected",
+                    "versionType": "semver",
+                    "lessThanOrEqual": "0.11.5"
+                  }
+                ],
+                "packageURL": "pkg:npm/%40tensei/media"
+              }
+            ]
+          }
+        ],
+        "cveTags": [],
+        "metrics": {
+          "cvssMetricV40": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:L/VI:L/VA:N/SC:L/SI:L/SA:N",
+                "baseScore": 5.3,
+                "baseSeverity": "MEDIUM",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "NONE",
+                "userInteraction": "PASSIVE",
+                "vulnConfidentialityImpact": "LOW",
+                "vulnIntegrityImpact": "LOW",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "LOW",
+                "subIntegrityImpact": "LOW",
+                "subAvailabilityImpact": "NONE",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            },
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Secondary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:L/VI:L/VA:N/SC:L/SI:L/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+                "baseScore": 5.3,
+                "baseSeverity": "MEDIUM",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "NONE",
+                "userInteraction": "PASSIVE",
+                "vulnConfidentialityImpact": "LOW",
+                "vulnIntegrityImpact": "LOW",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "LOW",
+                "subIntegrityImpact": "LOW",
+                "subAvailabilityImpact": "NONE",
+                "exploitMaturity": "NOT_DEFINED",
+                "confidentialityRequirement": "NOT_DEFINED",
+                "integrityRequirement": "NOT_DEFINED",
+                "availabilityRequirement": "NOT_DEFINED",
+                "modifiedAttackVector": "NOT_DEFINED",
+                "modifiedAttackComplexity": "NOT_DEFINED",
+                "modifiedAttackRequirements": "NOT_DEFINED",
+                "modifiedPrivilegesRequired": "NOT_DEFINED",
+                "modifiedUserInteraction": "NOT_DEFINED",
+                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            }
+          ],
+          "ssvcV203": [
+            {
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+              "ssvcData": {
+                "options": [
+                  {
+                    "exploitation": "none"
+                  },
+                  {
+                    "automatable": "no"
+                  },
+                  {
+                    "technicalImpact": "partial"
+                  }
+                ],
+                "role": "CISA Coordinator",
+                "version": "2.0.3",
+                "id": "CVE-2026-129549",
+                "timestamp": "2026-11-18T14:07:28.917323Z"
+              }
+            }
+          ],
+          "cvssMetricV31": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "exploitabilityScore": 2.8,
+              "impactScore": 2.7,
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "privilegesRequired": "NONE",
+                "userInteraction": "REQUIRED",
+                "scope": "CHANGED",
+                "confidentialityImpact": "LOW",
+                "integrityImpact": "LOW",
+                "availabilityImpact": "NONE",
+                "baseScore": 6.1,
+                "baseSeverity": "MEDIUM"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-129550",
+        "sourceIdentifier": "disclosure@vulncheck.com",
+        "vulnStatus": "Received",
+        "published": "2026-11-16T12:17:53.033",
+        "lastModified": "2026-11-16T16:17:52.537",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Tensei through 0.11.5 contains a privilege escalation vulnerability in @tensei/auth that allows unauthenticated or authenticated users to assign themselves arbitrary roles via the exposed User Roles field. Attackers can supply a roles array during registration, a POST to the users route, or a PATCH to their own record to gain administrator permissions."
+          }
+        ],
+        "references": [
+          {
+            "url": "https://github.com/tenseijs/tensei",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/tenseijs/tensei/blob/630f39038c7751178465f990fb358b0c2d5b1914/packages/auth/src/index.ts#L311-L333",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/tenseijs/tensei/issues/398",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://www.vulncheck.com/advisories/tensei-through-0.11.5-privilege-escalation-via-self-assigned-roles-in-tensei-auth",
+            "source": "disclosure@vulncheck.com"
+          }
+        ],
+        "weaknesses": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-915"
+              }
+            ]
+          }
+        ],
+        "affected": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "affectedData": [
+              {
+                "vendor": "tenseijs",
+                "product": "@tensei/auth",
+                "collectionURL": "https://www.npmjs.com",
+                "packageName": "@tensei/auth",
+                "repo": "https://github.com/tenseijs/tensei",
+                "defaultStatus": "unaffected",
+                "versions": [
+                  {
+                    "version": "0",
+                    "status": "affected",
+                    "versionType": "semver",
+                    "lessThanOrEqual": "0.11.5"
+                  }
+                ],
+                "packageURL": "pkg:npm/%40tensei/auth"
+              }
+            ]
+          }
+        ],
+        "cveTags": [],
+        "metrics": {
+          "cvssMetricV40": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N",
+                "baseScore": 9.3,
+                "baseSeverity": "CRITICAL",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "NONE",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "HIGH",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            },
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Secondary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+                "baseScore": 9.3,
+                "baseSeverity": "CRITICAL",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "NONE",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "HIGH",
+                "vulnAvailabilityImpact": "NONE",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "exploitMaturity": "NOT_DEFINED",
+                "confidentialityRequirement": "NOT_DEFINED",
+                "integrityRequirement": "NOT_DEFINED",
+                "availabilityRequirement": "NOT_DEFINED",
+                "modifiedAttackVector": "NOT_DEFINED",
+                "modifiedAttackComplexity": "NOT_DEFINED",
+                "modifiedAttackRequirements": "NOT_DEFINED",
+                "modifiedPrivilegesRequired": "NOT_DEFINED",
+                "modifiedUserInteraction": "NOT_DEFINED",
+                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            }
+          ],
+          "ssvcV203": [
+            {
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+              "ssvcData": {
+                "options": [
+                  {
+                    "exploitation": "none"
+                  },
+                  {
+                    "automatable": "yes"
+                  },
+                  {
+                    "technicalImpact": "total"
+                  }
+                ],
+                "role": "CISA Coordinator",
+                "version": "2.0.3",
+                "id": "CVE-2026-129550",
+                "timestamp": "2026-11-16T15:14:59.282701Z"
+              }
+            }
+          ],
+          "cvssMetricV31": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "exploitabilityScore": 3.9,
+              "impactScore": 5.2,
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "privilegesRequired": "NONE",
+                "userInteraction": "NONE",
+                "scope": "UNCHANGED",
+                "confidentialityImpact": "HIGH",
+                "integrityImpact": "HIGH",
+                "availabilityImpact": "NONE",
+                "baseScore": 9.1,
+                "baseSeverity": "CRITICAL"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-129551",
+        "sourceIdentifier": "disclosure@vulncheck.com",
+        "vulnStatus": "Received",
+        "published": "2026-11-16T12:17:53.190",
+        "lastModified": "2026-11-16T16:17:52.663",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Tensei through 0.11.5 contains a prototype pollution vulnerability in parseSortFromStringToObject of @tensei/rest that allows unauthenticated attackers to set Object.prototype properties via the sort parameter. Attackers can send a sort value like __proto__.<name>:<value> to list, fetch-one, update or delete routes before authorization, altering application logic and causing denial of service."
+          }
+        ],
+        "references": [
+          {
+            "url": "https://github.com/tenseijs/tensei",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/tenseijs/tensei/blob/630f39038c7751178465f990fb358b0c2d5b1914/packages/rest/src/populate-helpers.ts#L5-L20",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/tenseijs/tensei/issues/398",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://www.vulncheck.com/advisories/tensei-through-0.11.5-unauthenticated-prototype-pollution-via-sort-parameter",
+            "source": "disclosure@vulncheck.com"
+          }
+        ],
+        "weaknesses": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-1321"
+              }
+            ]
+          }
+        ],
+        "affected": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "affectedData": [
+              {
+                "vendor": "tenseijs",
+                "product": "@tensei/rest",
+                "collectionURL": "https://www.npmjs.com",
+                "packageName": "@tensei/rest",
+                "repo": "https://github.com/tenseijs/tensei",
+                "defaultStatus": "unaffected",
+                "versions": [
+                  {
+                    "version": "0",
+                    "status": "affected",
+                    "versionType": "semver",
+                    "lessThanOrEqual": "0.11.5"
+                  }
+                ],
+                "packageURL": "pkg:npm/%40tensei/rest"
+              }
+            ]
+          }
+        ],
+        "cveTags": [],
+        "metrics": {
+          "cvssMetricV40": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:L/VA:L/SC:N/SI:N/SA:N",
+                "baseScore": 6.9,
+                "baseSeverity": "MEDIUM",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "NONE",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "NONE",
+                "vulnIntegrityImpact": "LOW",
+                "vulnAvailabilityImpact": "LOW",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            },
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Secondary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:L/VA:L/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+                "baseScore": 6.9,
+                "baseSeverity": "MEDIUM",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "NONE",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "NONE",
+                "vulnIntegrityImpact": "LOW",
+                "vulnAvailabilityImpact": "LOW",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "exploitMaturity": "NOT_DEFINED",
+                "confidentialityRequirement": "NOT_DEFINED",
+                "integrityRequirement": "NOT_DEFINED",
+                "availabilityRequirement": "NOT_DEFINED",
+                "modifiedAttackVector": "NOT_DEFINED",
+                "modifiedAttackComplexity": "NOT_DEFINED",
+                "modifiedAttackRequirements": "NOT_DEFINED",
+                "modifiedPrivilegesRequired": "NOT_DEFINED",
+                "modifiedUserInteraction": "NOT_DEFINED",
+                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            }
+          ],
+          "ssvcV203": [
+            {
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+              "ssvcData": {
+                "options": [
+                  {
+                    "exploitation": "none"
+                  },
+                  {
+                    "automatable": "yes"
+                  },
+                  {
+                    "technicalImpact": "partial"
+                  }
+                ],
+                "role": "CISA Coordinator",
+                "version": "2.0.3",
+                "id": "CVE-2026-129551",
+                "timestamp": "2026-11-16T15:58:32.714827Z"
+              }
+            }
+          ],
+          "cvssMetricV31": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "exploitabilityScore": 3.9,
+              "impactScore": 2.5,
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "privilegesRequired": "NONE",
+                "userInteraction": "NONE",
+                "scope": "UNCHANGED",
+                "confidentialityImpact": "NONE",
+                "integrityImpact": "LOW",
+                "availabilityImpact": "LOW",
+                "baseScore": 6.5,
+                "baseSeverity": "MEDIUM"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-129552",
+        "sourceIdentifier": "disclosure@vulncheck.com",
+        "vulnStatus": "Received",
+        "published": "2026-11-16T12:17:53.337",
+        "lastModified": "2026-11-16T17:17:32.070",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Tensei through 0.11.5 contains an authentication bypass vulnerability in @tensei/auth that falls back to the hard-coded JWT signing key 'auth-secret-key' when JWT_SECRET is unset. Unauthenticated attackers can sign tokens with arbitrary user ids accepted by populateContextFromToken to impersonate any user, including administrators."
+          }
+        ],
+        "references": [
+          {
+            "url": "https://github.com/tenseijs/tensei",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/tenseijs/tensei/blob/630f39038c7751178465f990fb358b0c2d5b1914/packages/auth/src/index.ts#L94-L98",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://github.com/tenseijs/tensei/issues/398",
+            "source": "disclosure@vulncheck.com"
+          },
+          {
+            "url": "https://www.vulncheck.com/advisories/tensei-through-0.11.5-authentication-bypass-via-hard-coded-jwt-secret-in-tensei-auth",
+            "source": "disclosure@vulncheck.com"
+          }
+        ],
+        "weaknesses": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-1394"
+              }
+            ]
+          }
+        ],
+        "affected": [
+          {
+            "source": "disclosure@vulncheck.com",
+            "affectedData": [
+              {
+                "vendor": "tenseijs",
+                "product": "@tensei/auth",
+                "collectionURL": "https://www.npmjs.com",
+                "packageName": "@tensei/auth",
+                "repo": "https://github.com/tenseijs/tensei",
+                "defaultStatus": "unaffected",
+                "versions": [
+                  {
+                    "version": "0",
+                    "status": "affected",
+                    "versionType": "semver",
+                    "lessThanOrEqual": "0.11.5"
+                  }
+                ],
+                "packageURL": "pkg:npm/%40tensei/auth"
+              }
+            ]
+          }
+        ],
+        "cveTags": [],
+        "metrics": {
+          "cvssMetricV40": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N",
+                "baseScore": 9.3,
+                "baseSeverity": "CRITICAL",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "NONE",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "HIGH",
+                "vulnAvailabilityImpact": "HIGH",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            },
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Secondary",
+              "cvssData": {
+                "version": "4.0",
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+                "baseScore": 9.3,
+                "baseSeverity": "CRITICAL",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "attackRequirements": "NONE",
+                "privilegesRequired": "NONE",
+                "userInteraction": "NONE",
+                "vulnConfidentialityImpact": "HIGH",
+                "vulnIntegrityImpact": "HIGH",
+                "vulnAvailabilityImpact": "HIGH",
+                "subConfidentialityImpact": "NONE",
+                "subIntegrityImpact": "NONE",
+                "subAvailabilityImpact": "NONE",
+                "exploitMaturity": "NOT_DEFINED",
+                "confidentialityRequirement": "NOT_DEFINED",
+                "integrityRequirement": "NOT_DEFINED",
+                "availabilityRequirement": "NOT_DEFINED",
+                "modifiedAttackVector": "NOT_DEFINED",
+                "modifiedAttackComplexity": "NOT_DEFINED",
+                "modifiedAttackRequirements": "NOT_DEFINED",
+                "modifiedPrivilegesRequired": "NOT_DEFINED",
+                "modifiedUserInteraction": "NOT_DEFINED",
+                "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                "Safety": "NOT_DEFINED",
+                "Automatable": "NOT_DEFINED",
+                "Recovery": "NOT_DEFINED",
+                "valueDensity": "NOT_DEFINED",
+                "vulnerabilityResponseEffort": "NOT_DEFINED",
+                "providerUrgency": "NOT_DEFINED"
+              }
+            }
+          ],
+          "ssvcV203": [
+            {
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+              "ssvcData": {
+                "options": [
+                  {
+                    "exploitation": "none"
+                  },
+                  {
+                    "automatable": "yes"
+                  },
+                  {
+                    "technicalImpact": "total"
+                  }
+                ],
+                "role": "CISA Coordinator",
+                "version": "2.0.3",
+                "id": "CVE-2026-129552",
+                "timestamp": "2026-11-16T16:58:09.364649Z"
+              }
+            }
+          ],
+          "cvssMetricV31": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Primary",
+              "exploitabilityScore": 3.9,
+              "impactScore": 5.9,
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                "attackVector": "NETWORK",
+                "attackComplexity": "LOW",
+                "privilegesRequired": "NONE",
+                "userInteraction": "NONE",
+                "scope": "UNCHANGED",
+                "confidentialityImpact": "HIGH",
+                "integrityImpact": "HIGH",
+                "availabilityImpact": "HIGH",
+                "baseScore": 9.8,
+                "baseSeverity": "CRITICAL"
               }
             }
           ]
